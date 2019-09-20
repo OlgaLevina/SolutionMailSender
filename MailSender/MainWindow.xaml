@@ -6,8 +6,108 @@
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Name="MenuCreate" Header="Создать"></MenuItem>
+                <MenuItem Name="MenuOpen" Header="Открыть"></MenuItem>
+                <MenuItem Name="MenuSave" Header="Сохранить"></MenuItem>
+                <Separator/>
+                <MenuItem Name="MenuQuit" Header="Выход" Click="MenuQuit_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Сервис">
+                <MenuItem Name="MenuParameters" Header="Параметры"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Помощь">
+                <MenuItem Name="MenuAbout" Header="О программе!"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Name="TextStatus">Готов к работе!</TextBlock>
+        </StatusBar>
+        <TabControl>
+            <TabItem Header="Панели">
+                <TabControl TabStripPlacement="Bottom">
+                    <TabItem Header="Grid">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"></RowDefinition>
+                                <RowDefinition Height="2*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox Grid.Column="0" Grid.Row="1" Background="Beige" HorizontalAlignment="Center" VerticalAlignment="Center">Hello</TextBox>
+                            <Ellipse Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Fill="Aqua"></Ellipse>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="StackPanel">
+                        <StackPanel Orientation="Vertical">
+                            <Button>1</Button>
+                            <Button HorizontalAlignment="Center" Margin="20,30">2</Button>
+                            <Button>3</Button>
+                            <TextBox>Text</TextBox>
+                            <StackPanel Orientation="Horizontal">
+                                <Calendar></Calendar>
+                                <Image Source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1dthjp4zuU2Mf4diUpg2KekwZVCEZAMz7ewjFwlWUTqXkg1Gs"></Image>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="DockPanel">
+                        <DockPanel>
+                            <Button DockPanel.Dock="Left">1</Button>
+                            <Button HorizontalAlignment="Center" Margin="20,30" DockPanel.Dock="Bottom">2</Button>
+                            <Button DockPanel.Dock="Right">3</Button>
+                            <Button DockPanel.Dock="Top">4</Button>
+                            <Rectangle Fill="Red" Stroke="Black" StrokeDashArray="6" StrokeThickness="3" RadiusX="30" RadiusY="30"></Rectangle>
+                        </DockPanel>
+                    </TabItem>
+                    <TabItem Header="Canvas">
+                        <Canvas>
+                            <Button Canvas.Left="50" Canvas.Top="50" Padding="50,20">123456789</Button>
+                            <Label Canvas.Right="50" Canvas.Bottom="50" Padding="50,20">123456789</Label>
+                        </Canvas>
+                    </TabItem>
+                    <TabItem Header="WrapPanel">
+                        <WrapPanel>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                            <Button Content="Button" Padding="20"></Button>
+                        </WrapPanel>
+                    </TabItem>
+                    <TabItem Header="UniformGrid">
+                        <UniformGrid Columns="2" VerticalAlignment="Top">
+                            <TextBlock Margin="20">Surname</TextBlock>
+                            <TextBox>Type surname</TextBox>
+                            <TextBlock>Name</TextBlock>
+                            <TextBox>Type name</TextBox>
+                            <TextBlock>Second name</TextBlock>
+                            <TextBox>Type second name</TextBox>
+                            <TextBlock>Age</TextBlock>
+                            <TextBox>Type age</TextBox>
+                        </UniformGrid>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Списки"></TabItem>
+            <TabItem Header="Планировщик"></TabItem>
+            <TabItem Header="Письма"></TabItem>
+        </TabControl>
+    </DockPanel>
 
-    </Grid>
-    
 </Window>
