@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{E304DFA5-4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "MailSender\MailSender.csproj", "{D59F1659-A2EC-4275-BBC7-2B15406C2483}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.ConsoleTest", "Test\MailSender.ConsoleTest\MailSender.ConsoleTest.csproj", "{B87390BD-8923-4513-B1B9-CCF4BBB8FB93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,9 +19,16 @@ Global
 		{D59F1659-A2EC-4275-BBC7-2B15406C2483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D59F1659-A2EC-4275-BBC7-2B15406C2483}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D59F1659-A2EC-4275-BBC7-2B15406C2483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87390BD-8923-4513-B1B9-CCF4BBB8FB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87390BD-8923-4513-B1B9-CCF4BBB8FB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87390BD-8923-4513-B1B9-CCF4BBB8FB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87390BD-8923-4513-B1B9-CCF4BBB8FB93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B87390BD-8923-4513-B1B9-CCF4BBB8FB93} = {E304DFA5-402F-4C46-885C-E873A60725F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4104B58C-17EA-4154-B991-71E639824104}
