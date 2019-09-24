@@ -22,7 +22,7 @@ namespace MailSender
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();//https://icon-icons.com/ru/pack/Evil-icons-user-interface/1097
         }
 
         private void MenuQuit_Click(object sender, RoutedEventArgs e)
