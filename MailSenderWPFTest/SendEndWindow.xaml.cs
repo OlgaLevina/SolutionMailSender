@@ -10,24 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MailSender
+namespace MailSenderWPFTest
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для SendEndWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SendEndWindow : Window, IResult
     {
-        public MainWindow()
+        public SendEndWindow()
         {
             InitializeComponent();
         }
 
-        private void MenuQuit_Click(object sender, RoutedEventArgs e)
+        private void ButtonOk_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+        public void ShowResult(string message)
+        {
+            this.LabelResult.Content = message;//!!!!
+            this.Show(); }
+
     }
 }
