@@ -174,7 +174,7 @@
                 </DockPanel>
             </TabItem>
             <TabItem Header="Письма"/>
-            <TabItem Header="Панели" Visibility="Hidden">
+            <TabItem Header="Панели" Visibility="Visible">
                 <TabControl TabStripPlacement="Bottom">
                     <TabItem Header="Grid">
                         <Grid>
@@ -212,10 +212,13 @@
                             <Rectangle Fill="Red" Stroke="Black" StrokeDashArray="6" StrokeThickness="3" RadiusX="30" RadiusY="30"/>
                         </DockPanel>
                     </TabItem>
-                    <TabItem Header="Canvas">
+                    <TabItem Header="Canvas+bindings">
                         <Canvas>
-                            <Button Canvas.Left="50" Canvas.Top="50" Padding="50,20" Content="123456789"/>
-                            <Label Canvas.Right="50" Canvas.Bottom="50" Padding="50,20" Content="123456789"/>
+                            <TextBox Name="TextEditor" Text="30"  Canvas.Right="180" Canvas.Bottom="50" Padding="50,20"/>
+                            <TextBox Text="{Binding Text, ElementName=TextEditor, UpdateSourceTrigger=PropertyChanged}"  Canvas.Right="50" Canvas.Bottom="50" Padding="50,20"/>
+                            <TextBlock Name="TextViewer" Text="{Binding ElementName=TextEditor, Path=Text}" Canvas.Left="50" Canvas.Top="50" Padding="50,20" />
+                            <ProgressBar Value="{Binding Text,ElementName=TextEditor}" Minimum="0" Maximum="100" Height="20" Width="155"></ProgressBar>
+                            <Slider Value="{Binding Text,ElementName=TextEditor}" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="35"></Slider>
                         </Canvas>
                     </TabItem>
                     <TabItem Header="WrapPanel">
