@@ -49,6 +49,8 @@
       <DependentUpon>MailSenderDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Data\TestData.cs" />
+    <Compile Include="Entities\Letter.cs" />
+    <Compile Include="Entities\PassWord.cs" />
     <Compile Include="Entities\Sender.cs" />
     <Compile Include="Entities\Server.cs" />
     <Compile Include="MailSchedule.cs" />

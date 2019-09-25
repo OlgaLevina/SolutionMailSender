@@ -7,10 +7,11 @@
         xmlns:data="clr-namespace:MailSenderLib.Data;assembly=MailSenderLib"
         xmlns:entities="clr-namespace:MailSenderLib.Entities;assembly=MailSenderLib"
         xmlns:db="clr-namespace:MailSenderLib.Data.LinqToSQL;assembly=MailSenderLib"
+        xmlns:Tools="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:local="clr-namespace:MailSender"
         xmlns:Controls="clr-namespace:MailSender.Controls" x:Class="MailSender.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Icon="Media/Letter2.png">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -120,21 +121,45 @@
                         <StackPanel>
                             <TextBlock Text="Календарь:"/>
                             <Calendar/>
+                            <DockPanel >
+                                <TextBlock Text="Время:" Margin="0,0,10,0"></TextBlock>
+                                <Tools:TimePicker></Tools:TimePicker>
+                            </DockPanel>
                             <!--<DatePicker></DatePicker> - календарь сжатый в комбобох-->
-                            <StackPanel>
-                                <Button ToolTip="Запланировать" HorizontalAlignment="Stretch">
+                            <StackPanel >
+                                <Button Name="ButtonPlan" ToolTip="Запланировать" HorizontalAlignment="Stretch" Click="ButtonPlan_Click">
                                     <DockPanel>
                                         <fa:ImageAwesome Icon="ClockOutline" Width="18" VerticalAlignment="Center" DockPanel.Dock="Right" Foreground="#FF4D79A4" />
-                                        <TextBlock Text="Запланировать" Margin="10,0"/>
+                                        <TextBlock Text="Запланировать" Margin="5,0"/>
                                     </DockPanel>
                                 </Button>
-                                <Button ToolTip="Отправить" HorizontalAlignment="Stretch">
+                                <Button Name="ButtonSend" ToolTip="Отправить" HorizontalAlignment="Stretch" Click="ButtonSend_Click">
                                     <DockPanel>
                                         <fa:ImageAwesome Icon="SendOutline" Width="18" VerticalAlignment="Center" DockPanel.Dock="Right" Foreground="#FF4D79A4" />
-                                        <TextBlock Text="Отправить" Margin="10,0"/>
+                                        <TextBlock Text="Отправить" Margin="5,0"/>
                                     </DockPanel>
                                 </Button>
                             </StackPanel>
+                            <DockPanel>
+                                <Label MinWidth="85" Content="Test-сервер"/>
+                                <ComboBox Name="TestServer" MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="1">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type entities:Server}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock>Test-адресс:</TextBlock>
+                                <TextBox Name="TestAdress">sergolga@mail.ru</TextBox>
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Name="TestPassword">Test-пароль:</TextBlock>
+                                <PasswordBox></PasswordBox>
+                            </DockPanel>
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Задания:">
@@ -146,6 +171,7 @@
                                         <TextBlock Text="Сервер"/>
                                         <TextBlock Text="Отправитель"/>
                                         <TextBlock Text="Получатели"/>
+                                        <TextBlock Text="Письмо"/>
                                     </StackPanel>
                                 </GroupBox>
                             </ListBoxItem>
@@ -156,6 +182,7 @@
                                         <TextBlock Text="Сервер"/>
                                         <TextBlock Text="Отправитель"/>
                                         <TextBlock Text="Получатели"/>
+                                        <TextBlock Text="Письмо"/>
                                     </StackPanel>
                                 </GroupBox>
                             </ListBoxItem>
@@ -166,6 +193,7 @@
                                         <TextBlock Text="Сервер"/>
                                         <TextBlock Text="Отправитель"/>
                                         <TextBlock Text="Получатели"/>
+                                        <TextBlock Text="Письмо"/>
                                     </StackPanel>
                                 </GroupBox>
                             </ListBoxItem>
@@ -173,8 +201,58 @@
                     </GroupBox>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="Письма"/>
-            <TabItem Header="Панели" Visibility="Visible">
+            <TabItem Header="Письма">
+                <Grid>
+                    <Grid.Resources>
+                        <db:MailSenderDBDataContext x:Key="DataBase"/>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ToolBarTray Grid.Row="0">
+                        <ToolBar Band="0" BandIndex="0">
+                            <Button ToolTip="Создать" Width="25">
+                                <Image Source="Media/Create.png"/>
+                            </Button>
+                            <Button ToolTip="Редактировать" Width="25">
+                                <Image Source="Media/Reduct.png"/>
+                            </Button>
+                            <Button ToolTip="Удалить" Width="25">
+                                <Image Source="Media/Delete.png"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar>
+                            <Label MinWidth="85" Content="Перейти в планировщик"/>
+                            <Button ToolTip="Перейти" Width="25">
+                                <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF4D79A4" />
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="LettersList"
+                              GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray"
+                              IsReadOnly="True" HeadersVisibility="Column"
+                              ItemsSource="{Binding Source={x:Static data:TestData.Letters }}">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Заголовок" Width="*" Binding="{Binding Subject}"/>
+                            <DataGridTextColumn x:Name="LetterBody"  Header="Содержание" Width="*" Binding="{Binding Body}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <RichTextBox Grid.Row="2" Height="100" DataContext="{Binding ElementName=LettersList, Path=SelectedItem}">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}"></Run>
+                            </Paragraph>
+                        </FlowDocument>
+
+                    </RichTextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Статистика"/>
+            <TabItem Header="Панели" Visibility="Hidden">
                 <TabControl TabStripPlacement="Bottom">
                     <TabItem Header="Grid">
                         <Grid>

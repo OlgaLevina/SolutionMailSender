@@ -17,8 +17,15 @@ namespace MailSenderLib.Data
         };
         public static List<Sender> Senders { get; } = new List<Sender> {
             new Sender{ Id=1, Address="ivanov@yandex.ru",Name="Иванов"},
-            new Sender{ Id=1, Address="petrov@mail.ru",Name="Петров"},
-            new Sender{ Id=1, Address="sidorov@gmail.com",Name="Сидоров"},
+            new Sender{ Id=2, Address="petrov@mail.ru",Name="Петров"},
+            new Sender{ Id=3, Address="sidorov@gmail.com",Name="Сидоров"},
         };
+
+        public static List<Letter> Letters { get; } = new List<Letter> {
+            new Letter{ Id=1, Name="Рассылка1"},
+            new Letter{ Id=2, Name="Рассылка2"},
+            new Letter{ Id=3, Name="Рассылка3"},
+        };
+
     }
 }
