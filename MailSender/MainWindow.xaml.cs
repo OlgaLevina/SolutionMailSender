@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MailSender.Controls;
+using MailSenderLib.Entities;
 
 
 namespace MailSender
@@ -36,7 +37,7 @@ namespace MailSender
         {
             if (!(sender is TabItemsSwitcher switcher)) return;
             MainTabControl.SelectedIndex--;
-            int tabCount = MainTabControl.Items.Count-1;
+            int tabCount = MainTabControl.Items.Count - 1;
             foreach (TabItem tab in MainTabControl.Items) if (tab.Visibility == Visibility.Hidden) tabCount--;
             if (MainTabControl.SelectedIndex == 0) switcher.LeftButtonVisible = false;
             if (MainTabControl.SelectedIndex == MainTabControl.Items.Count - 3) switcher.RightButtonVisible = true;
@@ -54,19 +55,26 @@ namespace MailSender
 
         private void ButtonSend_Click(object sender, RoutedEventArgs e)
         {
-            if(TestAdress.Text==string.Empty || TestPassword.Text==string.Empty)
+            if (TestAdress.Text == string.Empty || TestPassword.Text == string.Empty || MessageText.Text==string.Empty)
             {
                 SendEndWindow result = new SendEndWindow();
-                result.ShowResult("Укажите данные Тестового отправителя на вкладке Планировщик!!");
+                result.ShowResult("Укажите данные Тестового отправителя на вкладке Планировщик, а также текст сообщения на вкладке Письма!!");
+            }
+            else {
+                new EmailSendServiceClass().Send(
+                    new MailSenderLib.Entities.Server(TestServer.SelectedItem as Server) { UserName = TestAdress.Text, Password = TestPassword.Text },
+                    new List<string>() {TestAdress.Text}, 
+                    LettersList.SelectedItem as Letter, 
+                    new SendEndWindow());
             }
             //string strLogin = cbSenderSelect.Text;
-           // string strPassword = cbSenderSelect.SelectedValue.ToString();
-          //  if (string.IsNullOrEmpty(strLogin))
-           // { MessageBox.Show("Выберите отправителя"); return; }
-           // if (string.IsNullOrEmpty(strPassword))
-          //  { MessageBox.Show("Укажите пароль отправителя"); return; }
-          //  EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword);
-          //  emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
+            // string strPassword = cbSenderSelect.SelectedValue.ToString();
+            //  if (string.IsNullOrEmpty(strLogin))
+            // { MessageBox.Show("Выберите отправителя"); return; }
+            // if (string.IsNullOrEmpty(strPassword))
+            //  { MessageBox.Show("Укажите пароль отправителя"); return; }
+            //  EmailSendServiceClass emailSender = new EmailSendServiceClass(strLogin, strPassword);
+            //  emailSender.SendMails((IQueryable<Email>)dgEmails.ItemsSource);
         }
 
         private void ButtonPlan_Click(object sender, RoutedEventArgs e)

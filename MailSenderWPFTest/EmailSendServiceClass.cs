@@ -9,9 +9,9 @@ using System.Security;
 
 namespace MailSenderWPFTest
 {
-    static class EmailSendServiceClass
+   static class EmailSendServiceClass
     {
-        public static void Send(KeyValuePair<string,int> host, PersonMail author,List<string> adresses, MessageContet msg,IResult resultMsg)
+        static public void Send(KeyValuePair<string,int> host, PersonMail author,List<string> adresses, MessageContet msg,IResult resultMsg)
         {
 
             using (SmtpClient client = new SmtpClient(host.Key, host.Value))

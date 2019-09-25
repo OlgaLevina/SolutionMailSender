@@ -142,7 +142,7 @@
                             </StackPanel>
                             <DockPanel>
                                 <Label MinWidth="85" Content="Test-сервер"/>
-                                <ComboBox Name="TestServer" MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="1">
+                                <ComboBox Name="TestServer" MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="1" >
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate DataType="{x:Type entities:Server}">
                                             <StackPanel Orientation="Horizontal">
@@ -233,7 +233,8 @@
                     <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="LettersList"
                               GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray"
                               IsReadOnly="True" HeadersVisibility="Column"
-                              ItemsSource="{Binding Source={x:Static data:TestData.Letters }}">
+                              ItemsSource="{Binding Source={x:Static data:TestData.Letters }}"
+                              SelectedIndex="0">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
@@ -244,7 +245,7 @@
                     <RichTextBox Grid.Row="2" Height="100" DataContext="{Binding ElementName=LettersList, Path=SelectedItem}">
                         <FlowDocument>
                             <Paragraph>
-                                <Run Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}"></Run>
+                                <Run Name="MessageText" Text="{Binding Body, UpdateSourceTrigger=PropertyChanged}"></Run>
                             </Paragraph>
                         </FlowDocument>
 

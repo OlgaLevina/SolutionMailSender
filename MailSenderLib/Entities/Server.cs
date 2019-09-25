@@ -15,5 +15,12 @@ namespace MailSenderLib.Entities
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Description { get; set; }
+
+        public Server() { }
+        public Server (Server server)
+        {
+            Id = server.Id;Address = server.Address; Name = server.Name;Port = server.Port;
+            UserName = server.UserName;Password = server.Password;Description = server.Description;
+        }
     }
 }
