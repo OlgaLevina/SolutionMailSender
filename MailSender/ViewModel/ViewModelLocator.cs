@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Ioc;
 using CommonServiceLocator;
 using MailSenderLib.Services;
 using MailSenderLib.Data.LinqToSQL;
+using MailSenderLib.Services.Interfaces;
 
 namespace MailSender.ViewModel
 {
@@ -14,7 +15,8 @@ namespace MailSender.ViewModel
             var services = SimpleIoc.Default;
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             services.Register<MainWindowViewModel>();//далее регистристрируем все, что нам может пригодится в качестве сервисов
-            services.Register<LinkToSQLRecipientsDataProvider>();
+            services.Register< IRecipientsDataProvider, LinkToSQLRecipientsDataProvider >(); //- переключаем при необходимости на другой
+            //services.Register< IRecipientsDataProvider, InMemoryRecipientsDataProvider >();//- переключаем при необходимости на другой
             services.Register(()=> new MailSenderDBDataContext());
         }
 

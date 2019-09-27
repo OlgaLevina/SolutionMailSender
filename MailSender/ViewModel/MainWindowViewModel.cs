@@ -2,6 +2,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MailSenderLib.Data.LinqToSQL;
 using MailSenderLib.Services;
+using MailSenderLib.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -12,7 +13,7 @@ namespace MailSender.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private string _WindowTitle = "Программа по рассылке почты";
-        private LinkToSQLRecipientsDataProvider _RecipientsProvider;
+        private IRecipientsDataProvider _RecipientsProvider;
         public string WindowTitle
         {
             get => _WindowTitle;
@@ -37,9 +38,9 @@ namespace MailSender.ViewModel
 
         public ICommand SaveChangesCommand { get; }
 
-        public MainWindowViewModel(LinkToSQLRecipientsDataProvider Link2SQLRecipientsDataProvider)
+        public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider)
         {
-            _RecipientsProvider = Link2SQLRecipientsDataProvider;
+            _RecipientsProvider = RecipientsDataProvider;
             RefrashDataCommand = new RelayCommand(OnRefrashDataCommandExecuted,CanRefrashDataCommandExecute);
             //RefreshData();
         }

@@ -64,12 +64,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\InMemory\InMemoryRecipientsDataProvider.cs" />
     <Compile Include="Services\Interfaces\IRecipientsDataProvider.cs" />
-    <Compile Include="Services\LinkToSQLRecipientsDataProvider.cs" />
+    <Compile Include="Services\Link2SQL\LinkToSQLRecipientsDataProvider.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Link2SQL\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Data\LinqToSQL\MailSenderDB.dbml">
