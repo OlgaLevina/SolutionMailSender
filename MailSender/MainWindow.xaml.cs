@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MailSender.Controls;
 using MailSenderLib.Entities;
+using MailSenderLib.Data.LinqToSQL;
+using System.Security;
 
 
 namespace MailSender
@@ -55,17 +57,17 @@ namespace MailSender
 
         private void ButtonSend_Click(object sender, RoutedEventArgs e)
         {
-            if (TestAdress.Text == string.Empty || TestPassword.Text == string.Empty || MessageText.Text==string.Empty)
+            //MessageBox.Show(TestPassword.SecurePassword.ToString());
+            if (TestAdress.Text == string.Empty || TestPassword.SecurePassword.Length == 0 || MessageText.Text==string.Empty)
             {
+                //https://social.msdn.microsoft.com/Forums/vstudio/ru-RU/c315d637-12da-4383-b598-e252363515dc/disable-button-if-passwordbox-is-empty?forum=wpf
                 SendEndWindow result = new SendEndWindow();
-                result.ShowResult("Укажите данные Тестового отправителя на вкладке Планировщик, а также текст сообщения на вкладке Письма!!");
+                result.Show("Укажите данные Тестового отправителя на вкладке Планировщик, а также текст сообщения на вкладке Письма!!");
             }
             else {
-                new EmailSendServiceClass().Send(
-                    new MailSenderLib.Entities.Server(TestServer.SelectedItem as Server) { UserName = TestAdress.Text, Password = TestPassword.Text },
-                    new List<string>() {TestAdress.Text}, 
-                    LettersList.SelectedItem as Letter, 
-                    new SendEndWindow());
+                new EmailSendServiceClass(new MailSenderLib.Entities.Server(TestServer.SelectedItem as Server) { UserName = TestAdress.Text, Password = TestPassword.SecurePassword },
+                    LettersList.SelectedItem as Letter,
+                    new SendEndWindow()).Send( new List<string>() { TestAdress.Text });
             }
             //string strLogin = cbSenderSelect.Text;
             // string strPassword = cbSenderSelect.SelectedValue.ToString();
@@ -79,6 +81,23 @@ namespace MailSender
 
         private void ButtonPlan_Click(object sender, RoutedEventArgs e)
         {
+            //MailScheduler<Recipient> schedule = new MailScheduler<Recipient>();// рабочий вариант
+            MailScheduler<string> schedule = new MailScheduler<string>();
+            TimeSpan tsSendTime = schedule.GetSendTime(TimePick.Text);
+            if (tsSendTime == new TimeSpan())
+            { new SendEndWindow().Show("Некорректный формат даты"); return; }
+            DateTime dtSendDateTime = (CalenderMail.SelectedDate ?? DateTime.Today).Add(tsSendTime);
+            if (dtSendDateTime < DateTime.Now)
+            { new SendEndWindow().Show("Дата и время отправки писем не могут быть раньше, чем настоящее время"); return; }
+            //EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString());
+            schedule.PlanSendEmails(dtSendDateTime,
+                new EmailSendServiceClass(new MailSenderLib.Entities.Server(TestServer.SelectedItem as Server) { UserName = TestAdress.Text, Password = TestPassword.SecurePassword },
+                    LettersList.SelectedItem as Letter,
+                    new SendEndWindow()),
+                //new Recipient() as IEnumerable<Recipient>,//!!!!
+                //new MailSenderDBDataContext().Recipient,// рабочий вариант
+                new List<string>() { TestAdress.Text },
+                new SendEndWindow());
 
         }
     }

@@ -11,7 +11,7 @@
         xmlns:local="clr-namespace:MailSender"
         xmlns:Controls="clr-namespace:MailSender.Controls" x:Class="MailSender.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="Media/Letter2.png">
+        Title="MainWindow" Height="490.5" Width="800" Icon="Media/Letter2.png">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -120,10 +120,10 @@
                     <GroupBox Header="Управление:">
                         <StackPanel>
                             <TextBlock Text="Календарь:"/>
-                            <Calendar/>
+                            <Calendar Name="CalenderMail"/>
                             <DockPanel >
                                 <TextBlock Text="Время:" Margin="0,0,10,0"></TextBlock>
-                                <Tools:TimePicker></Tools:TimePicker>
+                                <Tools:TimePicker Name="TimePick"></Tools:TimePicker>
                             </DockPanel>
                             <!--<DatePicker></DatePicker> - календарь сжатый в комбобох-->
                             <StackPanel >
@@ -157,8 +157,8 @@
                                 <TextBox Name="TestAdress">sergolga@mail.ru</TextBox>
                             </DockPanel>
                             <DockPanel>
-                                <TextBlock Name="TestPassword">Test-пароль:</TextBlock>
-                                <PasswordBox></PasswordBox>
+                                <TextBlock >Test-пароль:</TextBlock>
+                                <PasswordBox Name="TestPassword"></PasswordBox>
                             </DockPanel>
                         </StackPanel>
                     </GroupBox>

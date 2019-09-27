@@ -28,9 +28,9 @@ namespace MailSender.Controls
         {
             Close();
         }
-        public void ShowResult(string message)
+        public void Show(string message)
         {
-            this.LabelResult.Content = message;//!!!!
+            this.LabelResult.Text = message;//!!!!
             this.Show(); }
 
     }

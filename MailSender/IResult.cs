@@ -8,6 +8,6 @@ namespace MailSender
 {
     interface IResult
     {
-        void ShowResult(string msg);
+        void Show(string msg);
     }
 }
