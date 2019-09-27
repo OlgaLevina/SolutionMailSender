@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MailSenderLib.Data.LinqToSQL;
+using MailSenderLib.Services.Interfaces;
 
 namespace MailSenderLib.Services
 {
-    public class RecipientsDataProvider
+    public class LinkToSQLRecipientsDataProvider : IRecipientsDataProvider
     {
         public readonly MailSenderDBDataContext _db;
-        public RecipientsDataProvider(MailSenderDBDataContext db) { _db = db; }
+        public LinkToSQLRecipientsDataProvider(MailSenderDBDataContext db) { _db = db; }
         public IEnumerable<Recipient> GetAll()
         {
             _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues);//добавили,т.к. данный не обновлялись толком

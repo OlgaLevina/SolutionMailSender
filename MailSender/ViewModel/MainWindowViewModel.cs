@@ -12,7 +12,7 @@ namespace MailSender.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private string _WindowTitle = "Программа по рассылке почты";
-        private RecipientsDataProvider _RecipientsProvider;
+        private LinkToSQLRecipientsDataProvider _RecipientsProvider;
         public string WindowTitle
         {
             get => _WindowTitle;
@@ -37,9 +37,9 @@ namespace MailSender.ViewModel
 
         public ICommand SaveChangesCommand { get; }
 
-        public MainWindowViewModel(RecipientsDataProvider RecipientsProvaider)
+        public MainWindowViewModel(LinkToSQLRecipientsDataProvider Link2SQLRecipientsDataProvider)
         {
-            _RecipientsProvider = RecipientsProvaider;
+            _RecipientsProvider = Link2SQLRecipientsDataProvider;
             RefrashDataCommand = new RelayCommand(OnRefrashDataCommandExecuted,CanRefrashDataCommandExecute);
             //RefreshData();
         }

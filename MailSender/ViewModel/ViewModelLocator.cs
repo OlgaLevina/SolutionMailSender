@@ -14,7 +14,7 @@ namespace MailSender.ViewModel
             var services = SimpleIoc.Default;
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             services.Register<MainWindowViewModel>();//далее регистристрируем все, что нам может пригодится в качестве сервисов
-            services.Register<RecipientsDataProvider>();
+            services.Register<LinkToSQLRecipientsDataProvider>();
             services.Register(()=> new MailSenderDBDataContext());
         }
 
