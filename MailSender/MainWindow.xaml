@@ -36,7 +36,7 @@
                 <Controls:TabItemsSwitcher Height="20" Width="99" LeftButtonVisible="False" LeftButtonClick="TabItemsSwitcher_LeftButtonClick" RightButtonClick="TabItemsSwitcher_RightButtonClick"/>
             </StatusBarItem>
         </StatusBar>
-        <TabControl Name="MainTabControl">
+        <TabControl Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged">
             <TabItem Header="Рассылка">
                 <Grid>
                     <Grid.Resources>
@@ -282,7 +282,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Статистика"/>
-            <TabItem Header="Панели" Visibility="Hidden">
+            <TabItem Header="Панели" Visibility="Visible">
                 <TabControl TabStripPlacement="Bottom">
                     <TabItem Header="Grid">
                         <Grid>
@@ -327,6 +327,16 @@
                             <TextBlock Name="TextViewer" Text="{Binding ElementName=TextEditor, Path=Text}" Canvas.Left="50" Canvas.Top="50" Padding="50,20" />
                             <ProgressBar Value="{Binding Text,ElementName=TextEditor}" Minimum="0" Maximum="100" Height="20" Width="155"></ProgressBar>
                             <Slider Value="{Binding Text,ElementName=TextEditor}" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="35"></Slider>
+                            <Slider Name="ElX" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="50"></Slider>
+                            <Slider Name="ElY" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="70"></Slider>
+                            <Slider Name="Angele" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="90"></Slider>
+                            <Ellipse Height="{Binding  Value, ElementName=ElY}" Width="{Binding Value, ElementName=ElX}" RenderTransformOrigin="0.5,0.5">
+                                <Ellipse.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="{Binding Value, ElementName=Angele}"/>
+                                    </TransformGroup>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
                         </Canvas>
                     </TabItem>
                     <TabItem Header="WrapPanel">
