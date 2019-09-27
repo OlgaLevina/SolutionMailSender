@@ -34,21 +34,21 @@ namespace MailSender
 
         public int OffsetX
         {
-            get => OffsetX;
+            get => _OffsetX;
             set => Set(ref _OffsetX, value);
         }
         private int _OffsetY = 10;
 
         public int OffsetY
         {
-            get => OffsetY;
+            get => _OffsetY;
             set => Set(ref _OffsetY, value);
         }
         private double _Angle = 10;
 
         public double Angle
         {
-            get => Angle;
+            get => _Angle;
             set => Set(ref _Angle, value);
         }
     }
