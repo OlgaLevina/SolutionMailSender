@@ -11,6 +11,11 @@ namespace MailSenderLib.Services
     {
         public readonly MailSenderDBDataContext _db;
         public RecipientsDataProvider(MailSenderDBDataContext db) { _db = db; }
-        public IEnumerable<Recipient> GetAll() => _db.Recipient.ToArray();
+        public IEnumerable<Recipient> GetAll()
+        {
+            _db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues);//добавили,т.к. данный не обновлялись толком
+            return _db.Recipient.ToArray();
+            
+        }
     }
 }

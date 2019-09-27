@@ -11,8 +11,9 @@
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,10,0,7" FontSize="23">Получатели писем</TextBlock>
         <DockPanel DockPanel.Dock="Top" Margin="5,0,5,3">
             <TextBlock>Фильтр</TextBlock>
-            <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="30,10" Margin="0,7">Обновить</Button>
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" 
+            <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="30,10" Margin="0,7" 
+                    Content="Обновить" Command="{Binding RefrashDataCommand}"/>
+            <DataGrid  AutoGenerateColumns="False" SelectedItem="{Binding SelectedRecipientIs}"
                               GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray"
                               IsReadOnly="True" HeadersVisibility="Column"
                               ItemsSource="{Binding Recipients}"

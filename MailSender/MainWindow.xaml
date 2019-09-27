@@ -138,7 +138,14 @@
                         </ToolBar>
                     </ToolBarTray>
                     <Grid Grid.Row="1">
-                        <view:RecipientsView/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <view:RecipientsView Grid.Column="0" Margin="5"/>
+                        <view:RecipientsEditor Grid.Column="1" Margin="5"/>
+                        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" Width="4"
+                                      HorizontalAlignment="Left" Background="Transparent"/>
                     </Grid>
                 </Grid>
             </TabItem>

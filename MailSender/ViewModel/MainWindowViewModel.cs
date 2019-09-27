@@ -1,8 +1,12 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using MailSenderLib.Data.LinqToSQL;
 using MailSenderLib.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+
+
 namespace MailSender.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
@@ -15,19 +19,41 @@ namespace MailSender.ViewModel
             set => Set(ref _WindowTitle, value);
         }
 
-        public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
+        private Recipient _SelectedRecipientIs;
+        public Recipient SelectedRecipientIs
+        {
+            get => _SelectedRecipientIs; set => Set(ref _SelectedRecipientIs, value);
+        }
+
+        //public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>(); - в таком виде не сразу обновл€ютс€ данные, поэтому см. далее поле и св-во соответственно
+        private ObservableCollection<Recipient> _Recipients = new ObservableCollection<Recipient>();
+        public ObservableCollection<Recipient> Recipients
+        {
+            get => _Recipients;
+            set => Set(ref _Recipients, value);
+        }
+
+        public ICommand RefrashDataCommand { get; }
 
         public MainWindowViewModel(RecipientsDataProvider RecipientsProvaider)
         {
             _RecipientsProvider = RecipientsProvaider;
-            RefreshData();
+            RefrashDataCommand = new RelayCommand(OnRefrashDataCommandExecuted,CanRefrashDataCommandExecute);
+            //RefreshData();
         }
+
+        private bool CanRefrashDataCommandExecute() =>true;
+        private void OnRefrashDataCommandExecuted() { RefreshData(); }
 
         private void RefreshData()
         {
-            var recipients = Recipients;
-            recipients.Clear();
+
+            //var recipients = Recipients; - изменено из-за по€влени€ соответствующих пол€ и св-ва
+            var recipients = new ObservableCollection<Recipient>();
+            //recipients.Clear(); - т.к. по€вились поле и св-ва обзервэблкол.
             foreach (var recipient in _RecipientsProvider.GetAll()) { recipients.Add(recipient); }
+            Recipients = null;//боролись с обновлением данных, скорее всего не требуетс€
+            Recipients = recipients;
         }
     }
 }
