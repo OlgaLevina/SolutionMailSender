@@ -19,10 +19,10 @@ namespace MailSender.ViewModel
             set => Set(ref _WindowTitle, value);
         }
 
-        private Recipient _SelectedRecipientIs;
-        public Recipient SelectedRecipientIs
+        private Recipient _SelectedRecipient;
+        public Recipient SelectedRecipient
         {
-            get => _SelectedRecipientIs; set => Set(ref _SelectedRecipientIs, value);
+            get => _SelectedRecipient; set => Set(ref _SelectedRecipient, value);
         }
 
         //public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>(); - в таком виде не сразу обновляются данные, поэтому см. далее поле и св-во соответственно
@@ -34,6 +34,8 @@ namespace MailSender.ViewModel
         }
 
         public ICommand RefrashDataCommand { get; }
+
+        public ICommand SaveChangesCommand { get; }
 
         public MainWindowViewModel(RecipientsDataProvider RecipientsProvaider)
         {
@@ -55,5 +57,8 @@ namespace MailSender.ViewModel
             Recipients = null;//боролись с обновлением данных, скорее всего не требуется
             Recipients = recipients;
         }
+
+        private bool CanSaveChangesCommandExecute() => true;
+        private void OnSaveChangesCommandExecuted() { _RecipientsProvider.SaveChanges(); }
     }
 }

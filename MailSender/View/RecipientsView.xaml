@@ -13,7 +13,7 @@
             <TextBlock>Фильтр</TextBlock>
             <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="30,10" Margin="0,7" 
                     Content="Обновить" Command="{Binding RefrashDataCommand}"/>
-            <DataGrid  AutoGenerateColumns="False" SelectedItem="{Binding SelectedRecipientIs}"
+            <DataGrid  AutoGenerateColumns="False" SelectedItem="{Binding SelectedRecipient}"
                               GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray"
                               IsReadOnly="True" HeadersVisibility="Column"
                               ItemsSource="{Binding Recipients}"
