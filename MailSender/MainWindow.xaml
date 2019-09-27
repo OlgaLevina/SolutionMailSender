@@ -321,7 +321,7 @@
                         </DockPanel>
                     </TabItem>
                     <TabItem Header="Canvas+bindings">
-                        <Canvas>
+                        <Canvas >
                             <Canvas.DataContext>
                                 <local:PannelsViewModel/>
                             </Canvas.DataContext>
