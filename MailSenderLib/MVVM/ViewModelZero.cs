@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace MailSenderLib.MVVM
 {
-    public abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModelZero : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -9,9 +9,12 @@
         xmlns:db="clr-namespace:MailSenderLib.Data.LinqToSQL;assembly=MailSenderLib"
         xmlns:Tools="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:local="clr-namespace:MailSender"
-        xmlns:Controls="clr-namespace:MailSender.Controls" x:Class="MailSender.MainWindow"
+        xmlns:Controls="clr-namespace:MailSender.Controls"
+    xmlns:view="clr-namespace:MailSender.View" x:Class="MailSender.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="490.5" Width="800" Icon="Media/Letter2.png">
+        Title="{Binding WindowTitle}" Height="490.5" Width="800" Icon="Media/Letter2.png"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+    >
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -39,9 +42,11 @@
         <TabControl Name="MainTabControl">
             <TabItem Header="Рассылка">
                 <Grid>
+                    <!--
                     <Grid.Resources>
                         <db:MailSenderDBDataContext x:Key="DataBase"/>
                     </Grid.Resources>
+                    -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -132,16 +137,9 @@
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
-                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" 
-                              GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray"
-                              IsReadOnly="True" HeadersVisibility="Column"
-                              ItemsSource="{Binding Recipient, Source={StaticResource DataBase}}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding Address}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid Grid.Row="1">
+                        <view:RecipientsView/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Планировщик">
@@ -282,7 +280,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Статистика"/>
-            <TabItem Header="Панели" Visibility="Visible">
+            <TabItem Header="Панели" Visibility="Hidden">
                 <TabControl TabStripPlacement="Bottom">
                     <TabItem Header="Grid">
                         <Grid>
@@ -321,10 +319,12 @@
                         </DockPanel>
                     </TabItem>
                     <TabItem Header="Canvas+bindings">
-                        <Canvas >
+                        <Canvas>
+                           <!-- 
                             <Canvas.DataContext>
                                 <local:PannelsViewModel/>
                             </Canvas.DataContext>
+                            -->
                             <TextBox Name="TextEditor" Text="30"  Canvas.Right="180" Canvas.Bottom="50" Padding="50,20"/>
                             <TextBox Text="{Binding Text, ElementName=TextEditor, UpdateSourceTrigger=PropertyChanged}"  Canvas.Right="50" Canvas.Bottom="50" Padding="50,20"/>
                             <TextBlock Name="TextViewer" Text="{Binding ElementName=TextEditor, Path=Text}" Canvas.Left="50" Canvas.Top="50" Padding="50,20" />

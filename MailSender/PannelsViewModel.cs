@@ -7,7 +7,7 @@ using MailSenderLib.MVVM;
 
 namespace MailSender
 {
-    class PannelsViewModel: ViewModel
+    class PannelsViewModel: MailSenderLib.MVVM.ViewModelZero
     {
         //основыные св-ва нашей и\вью-модели
         private string _Title = "Name of window";

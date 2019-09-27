@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace MailSenderWPFTest
 {
-    class MainWindowViewModel : ViewModel
+    class MainWindowViewModel : ViewModelZero
     {
         //основыные св-ва нашей и\вью-модели
         private string _Title = "Name of window";
