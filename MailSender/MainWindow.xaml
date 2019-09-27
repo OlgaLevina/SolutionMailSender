@@ -47,6 +47,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <ToolBarTray Grid.Row="0">
+                        <!--
                         <ToolBar Band="0" BandIndex="0">
                             <Label MinWidth="85" Content="Отправители"/>
                             <ComboBox MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Name" SelectedIndex="0"/>
@@ -60,10 +61,23 @@
                                 <Image Source="Media/Delete.png"/>
                             </Button>
                         </ToolBar>
+                        -->
+                        <ToolBar Band="0" BandIndex="0">
+                            <Controls:ListController Items="{x:Static data:TestData.Senders}" 
+                                                     PanelName="Отправители" 
+                                                     DisplayMemberPath="Name"
+                                                     ValueMemberPath="Address"
+                                                     SelectedItemIndex="0"
+                                                     
+                                                     />
+                        </ToolBar>
                         <ToolBar Band="1" BandIndex="1">
-                            <Label MinWidth="85" Content="Серверы"/>
-                            <ComboBox MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
-                                <ComboBox.ItemTemplate>
+                            <Controls:ListController Items="{x:Static data:TestData.Servers}" 
+                                                     PanelName="Серверы" 
+                                                     SelectedItemIndex="0"
+                                                     DisplayMemberPath="Name"
+                                                     >
+                                <Controls:ListController.ItemTemplate>
                                     <DataTemplate DataType="{x:Type entities:Server}">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}"/>
@@ -72,18 +86,33 @@
                                             <!--<TextBlock Text="{Binding Port, StringFormat=:[0]}"></TextBlock>-->
                                         </StackPanel>
                                     </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button ToolTip="Создать" Width="25">
-                                <Image Source="Media/Create.png"/>
-                            </Button>
-                            <Button ToolTip="Редактировать" Width="25">
-                                <Image Source="Media/Reduct.png"/>
-                            </Button>
-                            <Button ToolTip="Удалить" Width="25">
-                                <Image Source="Media/Delete.png"/>
-                            </Button>
+                                </Controls:ListController.ItemTemplate>
+                            </Controls:ListController>
                         </ToolBar>
+                        <!-- <ToolBar Band="1" BandIndex="1">
+                            <Label MinWidth="85" Content="Серверы"/>
+                            <ComboBox MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type entities:Server}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Address}" Margin="3,0" Opacity="0.6"
+                                                       ToolTip="{Binding Port, StringFormat=:[0]}"/>
+                        </StackPanel>
+                        </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button ToolTip="Создать" Width="25">
+                            <Image Source="Media/Create.png"/>
+                        </Button>
+                        <Button ToolTip="Редактировать" Width="25">
+                            <Image Source="Media/Reduct.png"/>
+                        </Button>
+                        <Button ToolTip="Удалить" Width="25">
+                            <Image Source="Media/Delete.png"/>
+                        </Button>
+                        </ToolBar>
+                        -->
                         <ToolBar>
                             <Label MinWidth="85" Content="Перейти в планировщик"/>
                             <Button ToolTip="Перейти" Width="25">
