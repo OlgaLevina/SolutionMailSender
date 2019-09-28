@@ -13,7 +13,6 @@ namespace MailSender.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private string _WindowTitle = "Программа по рассылке почты";
-        private IRecipientsDataProvider _RecipientsProvider;
         public string WindowTitle
         {
             get => _WindowTitle;
@@ -34,9 +33,10 @@ namespace MailSender.ViewModel
             set => Set(ref _Recipients, value);
         }
 
-        public ICommand RefrashDataCommand { get; }
 
-        public ICommand SaveChangesCommand { get; }
+
+
+        private IRecipientsDataProvider _RecipientsProvider;
 
         public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider)
         {
@@ -45,9 +45,9 @@ namespace MailSender.ViewModel
             //RefreshData();
         }
 
+        public ICommand RefrashDataCommand { get; }
         private bool CanRefrashDataCommandExecute() =>true;
         private void OnRefrashDataCommandExecuted() { RefreshData(); }
-
         private void RefreshData()
         {
 
@@ -59,6 +59,7 @@ namespace MailSender.ViewModel
             Recipients = recipients;
         }
 
+        public ICommand SaveChangesCommand { get; }
         private bool CanSaveChangesCommandExecute() => true;
         private void OnSaveChangesCommandExecuted() { _RecipientsProvider.SaveChanges(); }
     }

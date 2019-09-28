@@ -17,6 +17,7 @@ namespace MailSender.ViewModel
             services.Register<MainWindowViewModel>();//далее регистристрируем все, что нам может пригодится в качестве сервисов
             services.Register< IRecipientsDataProvider, LinkToSQLRecipientsDataProvider >(); //- переключаем при необходимости на другой
             //services.Register< IRecipientsDataProvider, InMemoryRecipientsDataProvider >();//- переключаем при необходимости на другой
+            //services.Unregister<IRecipientsDataProvider>(); - либо моно разрегистрировать сервис, а потом зарегистрировать заново
             services.Register(()=> new MailSenderDBDataContext());
         }
 
