@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace MailSenderLib.Services.Interfaces
 {
-    interface IServersDataProvider
+    public interface IServersDataProvider: IDataProvider<Server>
     {
-        IEnumerable<Server> GetAll();
-        int Create(Server server);
-        void SaveChanges();
     }
 }

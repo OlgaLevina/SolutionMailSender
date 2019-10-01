@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace MailSenderLib.Entities
 {
-    public class Sender:HumanEntity
+    public class Recipient : HumanEntity
     {
-        //public int Id { get; set; }
-        //public string Name { get; set; }
-        //public string Address { get; set; }
+        public string Description;
     }
-
 }

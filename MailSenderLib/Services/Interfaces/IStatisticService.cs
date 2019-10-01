@@ -1,0 +1,15 @@
+﻿//using MailSenderLib.Data.LinqToSQL;
+using MailSenderLib.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MailSenderLib.Services.Interfaces
+{
+    public interface IStatisticService<T>  //интерфейс унифицируем, чтобы на его основе строить остальные. То же самое с классами провайдеров источников хранения данных (инМемори, линкту...  т.д.)
+    {
+
+    }
+}

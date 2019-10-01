@@ -50,8 +50,14 @@
       <DependentUpon>MailSenderDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Data\TestData.cs" />
-    <Compile Include="Entities\Letter.cs" />
+    <Compile Include="Entities\Base\BaseEntity.cs" />
+    <Compile Include="Entities\Base\HumanEntity.cs" />
+    <Compile Include="Entities\Base\NamedEntity.cs" />
+    <Compile Include="Entities\Email.cs" />
+    <Compile Include="Entities\RecipientsList.cs" />
     <Compile Include="Entities\PassWord.cs" />
+    <Compile Include="Entities\Recipient.cs" />
+    <Compile Include="Entities\SchedularTask.cs" />
     <Compile Include="Entities\Sender.cs" />
     <Compile Include="Entities\Server.cs" />
     <Compile Include="MailSchedule.cs" />
@@ -64,10 +70,22 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\InMemory\InMemoryDataProvider.cs" />
+    <Compile Include="Services\InMemory\InMemoryEmailsDataProvider.cs" />
+    <Compile Include="Services\InMemory\InMemorySchedularTasksDataProvider.cs" />
+    <Compile Include="Services\InMemory\InMemoryServersDataProvider.cs" />
+    <Compile Include="Services\InMemory\InMemoryRecipientsListsDataProvider.cs" />
+    <Compile Include="Services\InMemory\InMemorySendersDataProvider.cs" />
     <Compile Include="Services\InMemory\InMemoryRecipientsDataProvider.cs" />
+    <Compile Include="Services\Interfaces\IStatisticService.cs" />
+    <Compile Include="Services\Interfaces\IMailSenderService.cs" />
+    <Compile Include="Services\Interfaces\IDataProvider.cs" />
+    <Compile Include="Services\Interfaces\IEmailsDataProvider.cs" />
+    <Compile Include="Services\Interfaces\ISchedularTasksDataProvider.cs" />
+    <Compile Include="Services\Interfaces\IRecipientsListsDataProvider.cs" />
+    <Compile Include="Services\Interfaces\ISendersDataProvider.cs" />
     <Compile Include="Services\Interfaces\IRecipientsDataProvider.cs" />
     <Compile Include="Services\Interfaces\IServersDataProvider.cs" />
-    <Compile Include="Services\InTest\InTestDataServersProvider.cs" />
     <Compile Include="Services\Link2SQL\LinkToSQLRecipientsDataProvider.cs" />
   </ItemGroup>
   <ItemGroup />
