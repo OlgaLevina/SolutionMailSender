@@ -24,7 +24,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Label x:Name="LabelResult" HorizontalAlignment="Left" Margin="47,33,0,0" VerticalAlignment="Top" Height="395" Width="671" Content="result"/>
+        <TextBlock x:Name="LabelResult" HorizontalAlignment="Left" Margin="47,33,0,0" VerticalAlignment="Top" Height="395" Width="671" Text="result"/>
 
     </Grid>
 </Window>

@@ -10,28 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MailSender.Controls
+namespace MailSender.View
 {
     /// <summary>
-    /// Логика взаимодействия для SendEndWindow.xaml
+    /// Логика взаимодействия для RecipientsView.xaml
     /// </summary>
-    public partial class SendEndWindow : Window, IResult
+    public partial class RecipientsView : UserControl
     {
-        public SendEndWindow()
+        public RecipientsView()
         {
             InitializeComponent();
         }
-
-        private void ButtonOk_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-        public void Show(string message)
-        {
-            this.LabelResult.Text = message;//!!!!
-            this.Show(); }
-
     }
 }

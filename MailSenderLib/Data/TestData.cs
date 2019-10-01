@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MailSenderLib.Entities;
+using System.Security;
 
 namespace MailSenderLib.Data
 {
@@ -11,9 +12,9 @@ namespace MailSenderLib.Data
     {
         public static List<Server> Servers { get; } = new List<Server>
         {
-            new Server{Id=1, Name="Yandex", Address="smtp.yandex.ru",Password="Pass",UserName="UserName" },
-            new Server{Id=2, Name="Mail", Address="smtp.mail.ru",Password="Pass",UserName="UserName" },
-            new Server{Id=3, Name="Gmail", Address="smtp.gmail.com",Password="Pass",UserName="UserName", Port=433 },
+            new Server{Id=1, Name="Yandex", Address="smtp.yandex.ru",Password=new SecureString(),UserName="UserName" },
+            new Server{Id=2, Name="Mail", Address="smtp.mail.ru",Password=new SecureString(),UserName="UserName" },
+            new Server{Id=3, Name="Gmail", Address="smtp.gmail.com",Password=new SecureString(),UserName="UserName", Port=433 },
         };
         public static List<Sender> Senders { get; } = new List<Sender> {
             new Sender{ Id=1, Address="ivanov@yandex.ru",Name="Иванов"},

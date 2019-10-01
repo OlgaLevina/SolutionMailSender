@@ -8,12 +8,14 @@ using MailSenderLib.Data.LinqToSQL;
 
 namespace MailSender
 {
-    class MailScheduler
+    class MailScheduler <T>
     {
-        public DispatcherTimer EamilTimer { get; set; } = new DispatcherTimer();
+        public DispatcherTimer EmailTimer { get; set; } = new DispatcherTimer();
         public EmailSendServiceClass EmailSender { get; set; }
-        public DateTime EnailDateTime;
-        public IQueryable<Recipient> emails;
+        public DateTime EmailDateTime;
+        //public IQueryable<Recipient> Emails;
+        public IEnumerable<T> Emails;
+        public IResult ResultWindow;
 
         public TimeSpan GetSendTime(string strSendTime)
         {
@@ -23,16 +25,17 @@ namespace MailSender
             return tsSendTime;
         }
 
-        public void SendEmails(DateTime dtSend, EmailSendServiceClass emailSender, IQueryable<Recipient> emails)
+        public void PlanSendEmails(DateTime dtSend, EmailSendServiceClass emailSender, IEnumerable<T> emails, IResult result)
         {
             this.EmailSender = emailSender; 
-           // this.dtSend = dtSend; this.emails = emails; timer.Tick += Timer_Tick;
-           // timer.Interval = new TimeSpan(0, 0, 1); timer.Start();
+            this.EmailDateTime = dtSend; this.Emails = emails; EmailTimer.Tick += Timer_Tick;
+            EmailTimer.Interval = new TimeSpan(0, 0, 1); EmailTimer.Start();
+            this.ResultWindow = result;
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
-          //  if (dtSend.ToShortTimeString() == DateTime.Now.ToShortTimeString())
-          //  { emailSender.SendMails(emails); timer.Stop(); MessageBox.Show("Отправлены."); }
+            if (EmailDateTime.ToShortTimeString() == DateTime.Now.ToShortTimeString())
+            { EmailSender.Send(Emails); EmailTimer.Stop(); ResultWindow.Show("Was sent!"); }
         }
 
     }

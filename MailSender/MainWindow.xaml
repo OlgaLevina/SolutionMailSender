@@ -9,9 +9,12 @@
         xmlns:db="clr-namespace:MailSenderLib.Data.LinqToSQL;assembly=MailSenderLib"
         xmlns:Tools="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:local="clr-namespace:MailSender"
-        xmlns:Controls="clr-namespace:MailSender.Controls" x:Class="MailSender.MainWindow"
+        xmlns:Controls="clr-namespace:MailSender.Controls"
+    xmlns:view="clr-namespace:MailSender.View" x:Class="MailSender.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="Media/Letter2.png">
+        Title="{Binding WindowTitle}" Height="490.5" Width="800" Icon="Media/Letter2.png"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+    >
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -39,14 +42,17 @@
         <TabControl Name="MainTabControl">
             <TabItem Header="Рассылка">
                 <Grid>
+                    <!--
                     <Grid.Resources>
                         <db:MailSenderDBDataContext x:Key="DataBase"/>
                     </Grid.Resources>
+                    -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <ToolBarTray Grid.Row="0">
+                        <!--
                         <ToolBar Band="0" BandIndex="0">
                             <Label MinWidth="85" Content="Отправители"/>
                             <ComboBox MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Name" SelectedIndex="0"/>
@@ -60,10 +66,23 @@
                                 <Image Source="Media/Delete.png"/>
                             </Button>
                         </ToolBar>
+                        -->
+                        <ToolBar Band="0" BandIndex="0">
+                            <Controls:ListController Items="{x:Static data:TestData.Senders}" 
+                                                     PanelName="Отправители" 
+                                                     DisplayMemberPath="Name"
+                                                     ValueMemberPath="Address"
+                                                     SelectedItemIndex="0"
+                                                     
+                                                     />
+                        </ToolBar>
                         <ToolBar Band="1" BandIndex="1">
-                            <Label MinWidth="85" Content="Серверы"/>
-                            <ComboBox MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
-                                <ComboBox.ItemTemplate>
+                            <Controls:ListController Items="{x:Static data:TestData.Servers}" 
+                                                     PanelName="Серверы" 
+                                                     SelectedItemIndex="0"
+                                                     DisplayMemberPath="Name"
+                                                     >
+                                <Controls:ListController.ItemTemplate>
                                     <DataTemplate DataType="{x:Type entities:Server}">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}"/>
@@ -72,18 +91,33 @@
                                             <!--<TextBlock Text="{Binding Port, StringFormat=:[0]}"></TextBlock>-->
                                         </StackPanel>
                                     </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button ToolTip="Создать" Width="25">
-                                <Image Source="Media/Create.png"/>
-                            </Button>
-                            <Button ToolTip="Редактировать" Width="25">
-                                <Image Source="Media/Reduct.png"/>
-                            </Button>
-                            <Button ToolTip="Удалить" Width="25">
-                                <Image Source="Media/Delete.png"/>
-                            </Button>
+                                </Controls:ListController.ItemTemplate>
+                            </Controls:ListController>
                         </ToolBar>
+                        <!-- <ToolBar Band="1" BandIndex="1">
+                            <Label MinWidth="85" Content="Серверы"/>
+                            <ComboBox MinWidth="50" MaxWidth="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type entities:Server}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Address}" Margin="3,0" Opacity="0.6"
+                                                       ToolTip="{Binding Port, StringFormat=:[0]}"/>
+                        </StackPanel>
+                        </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button ToolTip="Создать" Width="25">
+                            <Image Source="Media/Create.png"/>
+                        </Button>
+                        <Button ToolTip="Редактировать" Width="25">
+                            <Image Source="Media/Reduct.png"/>
+                        </Button>
+                        <Button ToolTip="Удалить" Width="25">
+                            <Image Source="Media/Delete.png"/>
+                        </Button>
+                        </ToolBar>
+                        -->
                         <ToolBar>
                             <Label MinWidth="85" Content="Перейти в планировщик"/>
                             <Button ToolTip="Перейти" Width="25">
@@ -103,16 +137,16 @@
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
-                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" 
-                              GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray"
-                              IsReadOnly="True" HeadersVisibility="Column"
-                              ItemsSource="{Binding Recipient, Source={StaticResource DataBase}}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding Address}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <view:RecipientsView Grid.Column="0" Margin="5"/>
+                        <view:RecipientsEditor Grid.Column="1" Margin="5"/>
+                        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" Width="4"
+                                      HorizontalAlignment="Left" Background="Transparent"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Планировщик">
@@ -120,10 +154,10 @@
                     <GroupBox Header="Управление:">
                         <StackPanel>
                             <TextBlock Text="Календарь:"/>
-                            <Calendar/>
+                            <Calendar Name="CalenderMail"/>
                             <DockPanel >
                                 <TextBlock Text="Время:" Margin="0,0,10,0"></TextBlock>
-                                <Tools:TimePicker></Tools:TimePicker>
+                                <Tools:TimePicker Name="TimePick"></Tools:TimePicker>
                             </DockPanel>
                             <!--<DatePicker></DatePicker> - календарь сжатый в комбобох-->
                             <StackPanel >
@@ -157,8 +191,8 @@
                                 <TextBox Name="TestAdress">sergolga@mail.ru</TextBox>
                             </DockPanel>
                             <DockPanel>
-                                <TextBlock Name="TestPassword">Test-пароль:</TextBlock>
-                                <PasswordBox></PasswordBox>
+                                <TextBlock >Test-пароль:</TextBlock>
+                                <PasswordBox Name="TestPassword"></PasswordBox>
                             </DockPanel>
                         </StackPanel>
                     </GroupBox>
@@ -293,11 +327,26 @@
                     </TabItem>
                     <TabItem Header="Canvas+bindings">
                         <Canvas>
+                           <!-- 
+                            <Canvas.DataContext>
+                                <local:PannelsViewModel/>
+                            </Canvas.DataContext>
+                            -->
                             <TextBox Name="TextEditor" Text="30"  Canvas.Right="180" Canvas.Bottom="50" Padding="50,20"/>
                             <TextBox Text="{Binding Text, ElementName=TextEditor, UpdateSourceTrigger=PropertyChanged}"  Canvas.Right="50" Canvas.Bottom="50" Padding="50,20"/>
                             <TextBlock Name="TextViewer" Text="{Binding ElementName=TextEditor, Path=Text}" Canvas.Left="50" Canvas.Top="50" Padding="50,20" />
                             <ProgressBar Value="{Binding Text,ElementName=TextEditor}" Minimum="0" Maximum="100" Height="20" Width="155"></ProgressBar>
                             <Slider Value="{Binding Text,ElementName=TextEditor}" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="35"></Slider>
+                            <Slider Name="ElX" Value="{Binding OffsetX}" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="50"></Slider>
+                            <Slider Name="ElY" Value="{Binding OffsetY}" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="70"></Slider>
+                            <Slider Name="Angele" Value="{Binding Angle}" Minimum="0" Maximum="100" SmallChange="10" Height="20" Width="155" Canvas.Top="90"></Slider>
+                            <Ellipse Height="{Binding  OffsetY}" Width="{Binding OffsetX}" RenderTransformOrigin="0.5,0.5" Canvas.Left="300" Canvas.Top="150" Fill="Aqua">
+                                <Ellipse.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="{Binding Angle}"/>
+                                    </TransformGroup>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
                         </Canvas>
                     </TabItem>
                     <TabItem Header="WrapPanel">

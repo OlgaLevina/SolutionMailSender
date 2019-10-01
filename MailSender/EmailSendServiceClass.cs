@@ -7,34 +7,49 @@ using System.Net;
 using System.Net.Mail;
 using System.Security;
 using MailSenderLib.Entities;
+using MailSender.Controls;
+using MailSenderLib.Data.LinqToSQL;
 
 namespace MailSender
 {
     class EmailSendServiceClass
     {
 
-        public void Send(Server author,List<string> addresses, Letter msg, IResult resultMsg)
+        public Server Author { get; set; }
+        public Letter Msg { get; set; }
+        public IResult ResultMsg { get; set; }
+
+        public EmailSendServiceClass(Server author, Letter msg, IResult resultMsg)
+        { Author = author;Msg = msg;ResultMsg = resultMsg; }
+
+        public void Send<T>(IEnumerable<T> addresses)
         {
 
-            using (SmtpClient client = new SmtpClient(author.Address, author.Port))
+            using (SmtpClient client = new SmtpClient(Author.Address, Author.Port))
             {
                 client.EnableSsl = true;
-                client.Credentials = new NetworkCredential(author.UserName, author.Password);
-                foreach(string address in addresses)
+                client.Credentials = new NetworkCredential(Author.UserName, Author.Password);
+                foreach(T address in addresses)
                 {
                     using (MailMessage message = new MailMessage())
                     {
-                        message.From = new MailAddress(author.UserName, author.Name);
-                        message.To.Add(address);
-                        message.Subject = msg.Subject;
-                        message.Body = msg.Body;
-                        message.IsBodyHtml = msg.IsBodyHTML;
+                        message.From = new MailAddress(Author.UserName, Author.Name);
+                        message.To.Add(address as string);
+                        message.Subject = Msg.Subject;
+                        message.Body = Msg.Body;
+                        message.IsBodyHtml = Msg.IsBodyHTML;
                         // message.Attachments.Add(new Attachment(file))
-                        try { client.Send(message); resultMsg.ShowResult("Was sent!"); }
-                        catch (Exception error) { resultMsg.ShowResult(error.Message); }
+                        try { client.Send(message); ResultMsg.Show("Was sent!"); }
+                        catch (Exception error) { ResultMsg.Show(error.Message); }
                     }
                 }
             }
+        }
+
+        public void Send(IQueryable<Recipient> emails)
+        {
+            var addresses = emails.Select(s => new { s.Address }).ToList();
+            Send(addresses);
         }
     }
 }

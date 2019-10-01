@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security;
 
 namespace MailSenderLib.Entities
 {
@@ -13,7 +14,7 @@ namespace MailSenderLib.Entities
         public string Name { get; set; }
         public int Port { get; set; } = 25;
         public string UserName { get; set; }
-        public string Password { get; set; }
+        public SecureString Password { get; set; }
         public string Description { get; set; }
 
         public Server() { }
