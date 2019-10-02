@@ -13,7 +13,7 @@ namespace MailSenderLib.Services
     {
         public InMemoryEmailsDataProvider()
         {
-            _Items.AddRange(Enumerable.Range(1,20).Select(i => new Email { Id=i, Subject=$"Message {i}",Body=$"Text {i}"}))
+            _Items.AddRange(Enumerable.Range(1, 20).Select(i => new Email { Id = i, Subject = $"Message {i}", Body = $"Text {i}" }));
         }
 
         public override void Edit(int id, Email item)

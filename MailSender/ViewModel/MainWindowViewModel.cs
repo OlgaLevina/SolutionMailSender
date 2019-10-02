@@ -38,6 +38,8 @@ namespace MailSender.ViewModel
 
 
         private IRecipientsDataProvider _RecipientsProvider;
+        private ISendersDataProvider _SendersProvider;
+        private IServersDataProvider _ServersProvider;
 
         public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider,
             ISendersDataProvider SendersDataProvider, 
@@ -46,6 +48,8 @@ namespace MailSender.ViewModel
             _RecipientsProvider = RecipientsDataProvider;
             RefrashDataCommand = new RelayCommand(OnRefrashDataCommandExecuted,CanRefrashDataCommandExecute);
             //RefreshData();
+            _SendersProvider = SendersDataProvider;
+            _ServersProvider = ServersDataProvider;
         }
 
         public ICommand RefrashDataCommand { get; }
