@@ -13,6 +13,22 @@ namespace MailSenderLib.Test.Services.InMemory
     [TestClass]
     public class InMemoryRecipientsDataProviderTest
     {
+        // обаботка событий работы тестера в порядке их возникновения - на каждом этапе можно установить обработчики, например подгрузку данных из бд
+        [AssemblyInitialize]
+        public static void TestAssembly_Initialize(TestContext context){ }
+        [ClassInitialize]
+        public static void TestClass_Initialize(TestContext context){ }
+        public InMemoryRecipientsDataProviderTest() { }
+        [TestInitialize]
+        public static void Test_Initialize(){ }
+        [TestCleanup]
+        public static void Test_Cleanup(){ }
+        [ClassCleanup]
+        public static void TestClass_Cleanup(){ }
+        [AssemblyCleanup]
+        public static void TestAssembly_Cleanup(){ }
+
+
         [TestMethod]
         public void CreateNewRecipientInEmpryProvider()
         {
