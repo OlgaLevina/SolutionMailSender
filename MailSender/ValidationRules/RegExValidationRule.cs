@@ -27,7 +27,7 @@ namespace MailSender.ValidationRules
             if (value is null)
                 return AllowNul
                     ? ValidationResult.ValidResult
-                    : new ValidationResult(false, ErrorMessage ?? "Отсутствует ссыдка на строку");
+                    : new ValidationResult(false, ErrorMessage ?? "Отсутствует ссылка на строку");
             if (_Regex is null) return ValidationResult.ValidResult;
             if (!(value is string str)) str = value.ToString();
 
