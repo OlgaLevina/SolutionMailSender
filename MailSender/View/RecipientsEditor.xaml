@@ -8,8 +8,30 @@
              mc:Ignorable="d" 
              DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
              d:DesignHeight="165" d:DesignWidth="270">
-    <Grid Validation.Error="OnDataValidation_Error">
+    <Grid>
         <!--Grid Validation.Error="OnDataValidation_Error"-->
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBox}"><!--Если стилю не прописан ключ - применяется ко всем тагетам-->
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Bottom" Text="!!!"
+                                   VerticalAlignment="Center"
+                                   Foreground="Red"
+                                   FontWeight="Bold"
+                                   Margin="3,0"
+                                   ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=AdornedElement}"
+                                   />
+                                <Border Padding="2" BorderBrush="Red" BorderThickness="3" CornerRadius="3">
+                                    <AdornedElementPlaceholder Name="AdornedElement"/>
+                                </Border>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style> 
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -30,22 +52,6 @@
         <TextBox Grid.Column="1" Grid.Row="1" 
                  Text="{Binding SelectedRecipient.Name, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
         <TextBox Grid.Column="1" Grid.Row="2">
-            <Validation.ErrorTemplate>
-                <ControlTemplate>
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Bottom" Text="!!!"
-                                   VerticalAlignment="Center"
-                                   Foreground="Red"
-                                   FontWeight="Bold"
-                                   Margin="3,0"
-                                   ToolTip="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent, ElementName=AdornedElement}"
-                                   />
-                        <Border Padding="2" BorderBrush="Red" BorderThickness="3" CornerRadius="3">
-                            <AdornedElementPlaceholder Name="AdornedElement"/>
-                        </Border>
-                    </DockPanel>
-                </ControlTemplate>
-            </Validation.ErrorTemplate>
             <TextBox.Text>
                 <Binding Path="SelectedRecipient.Address" NotifyOnValidationError="True">
                     <Binding.ValidationRules>
