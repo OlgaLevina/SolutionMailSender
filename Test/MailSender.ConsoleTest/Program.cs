@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using static System.Console;
+using System.Globalization;
 
 namespace MailSender.ConsoleTest
 {
-    class Program
+   public class Program
     {
+
         static void Main(string[] args)
         {
+            //ThreadTests.Start();
+            SinchronizationTests.Start();
+
+            ReadLine();
+
         }
+
+
     }
+
+
 }
