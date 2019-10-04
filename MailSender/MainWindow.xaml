@@ -6,11 +6,11 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:data="clr-namespace:MailSenderLib.Data;assembly=MailSenderLib"
         xmlns:entities="clr-namespace:MailSenderLib.Entities;assembly=MailSenderLib"
-        xmlns:db="clr-namespace:MailSenderLib.Data.LinqToSQL;assembly=MailSenderLib"
         xmlns:Tools="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:local="clr-namespace:MailSender"
         xmlns:Controls="clr-namespace:MailSender.Controls"
-    xmlns:view="clr-namespace:MailSender.View" x:Class="MailSender.MainWindow"
+        xmlns:commands="clr-namespace:MailSender.Commands"
+        xmlns:view="clr-namespace:MailSender.View" x:Class="MailSender.MainWindow"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="490.5" Width="800" Icon="Media/Letter2.png"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
@@ -238,7 +238,7 @@
             <TabItem Header="Письма">
                 <Grid>
                     <Grid.Resources>
-                        <db:MailSenderDBDataContext x:Key="DataBase"/>
+                        <entities:Sender x:Key="DataBase"/>
                     </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

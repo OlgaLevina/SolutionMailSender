@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 
 namespace MailSenderLib.Services.Interfaces
 {
-    public interface IRecipientsDataProvider : IDataProvider<Recipient>
+    public interface ISendersDataProvider : IDataProvider<Sender>
     {}
 }

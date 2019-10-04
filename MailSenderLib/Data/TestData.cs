@@ -12,9 +12,9 @@ namespace MailSenderLib.Data
     {
         public static List<Server> Servers { get; } = new List<Server>
         {
-            new Server{Id=1, Name="Yandex", Address="smtp.yandex.ru",Password=new SecureString(),UserName="UserName" },
-            new Server{Id=2, Name="Mail", Address="smtp.mail.ru",Password=new SecureString(),UserName="UserName" },
-            new Server{Id=3, Name="Gmail", Address="smtp.gmail.com",Password=new SecureString(),UserName="UserName", Port=433 },
+            new Server{Id=1, Name="Yandex", Host="smtp.yandex.ru",Password=new SecureString(),UserName="UserName" },
+            new Server{Id=2, Name="Mail", Host="smtp.mail.ru",Password=new SecureString(),UserName="UserName" },
+            new Server{Id=3, Name="Gmail", Host="smtp.gmail.com",Password=new SecureString(),UserName="UserName", Port=433 },
         };
         public static List<Sender> Senders { get; } = new List<Sender> {
             new Sender{ Id=1, Address="ivanov@yandex.ru",Name="Иванов"},
@@ -22,10 +22,10 @@ namespace MailSenderLib.Data
             new Sender{ Id=3, Address="sidorov@gmail.com",Name="Сидоров"},
         };
 
-        public static List<Letter> Letters { get; } = new List<Letter> {
-            new Letter{ Id=1, Name="Рассылка1"},
-            new Letter{ Id=2, Name="Рассылка2"},
-            new Letter{ Id=3, Name="Рассылка3"},
+        public static List<Email> Letters { get; } = new List<Email> {
+            new Email{ Id=1, Name="Рассылка1"},
+            new Email{ Id=2, Name="Рассылка2"},
+            new Email{ Id=3, Name="Рассылка3"},
         };
 
     }

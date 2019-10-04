@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using MailSenderLib.Data.LinqToSQL;
+using MailSenderLib.Entities;
+//using MailSenderLib.Data.LinqToSQL;
 using MailSenderLib.Services;
 using MailSenderLib.Services.Interfaces;
 using System;
@@ -37,12 +38,18 @@ namespace MailSender.ViewModel
 
 
         private IRecipientsDataProvider _RecipientsProvider;
+        private ISendersDataProvider _SendersProvider;
+        private IServersDataProvider _ServersProvider;
 
-        public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider)
+        public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider,
+            ISendersDataProvider SendersDataProvider, 
+            IServersDataProvider ServersDataProvider)
         {
             _RecipientsProvider = RecipientsDataProvider;
             RefrashDataCommand = new RelayCommand(OnRefrashDataCommandExecuted,CanRefrashDataCommandExecute);
             //RefreshData();
+            _SendersProvider = SendersDataProvider;
+            _ServersProvider = ServersDataProvider;
         }
 
         public ICommand RefrashDataCommand { get; }

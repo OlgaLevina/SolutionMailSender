@@ -1,4 +1,5 @@
-﻿using MailSenderLib.Data.LinqToSQL;
+﻿//using MailSenderLib.Data.LinqToSQL;
+using MailSenderLib.Entities;
 using MailSenderLib.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,24 +9,19 @@ using System.Threading.Tasks;
 
 namespace MailSenderLib.Services
 {
-    public class InMemoryRecipientsDataProvider : IRecipientsDataProvider
+    public class InMemoryRecipientsDataProvider : InMemoryDataProvider<Recipient>, IRecipientsDataProvider
     {
-        private readonly List<Recipient> _Recipients = new List<Recipient>();
-        public int Create(Recipient recipient)
+        public InMemoryRecipientsDataProvider()
         {
-            if (_Recipients.Contains(recipient)) return recipient.Id;
-            recipient.Id = _Recipients.Count == 0 ? 1 : _Recipients.Max(r => r.Id) + 1;
-            _Recipients.Add(recipient);
-            return recipient.Id;
+            _Items.AddRange(Enumerable.Range(1, 5).Select(i => new Recipient { Id = i, Name = $"Recipient{i}", Address = $"recipient{i}@server.com", Description = "descriptiion" }));
         }
-
-        public IEnumerable<Recipient> GetAll()
+        public override void Edit(int id, Recipient item)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChanges()
-        {
+            var db_item = GetById(id);
+            if (db_item is null) return;
+            db_item.Name = item.Name;
+            db_item.Address = item.Address;
+            db_item.Description = item.Description;
         }
     }
 }

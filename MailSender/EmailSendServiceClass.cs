@@ -8,7 +8,7 @@ using System.Net.Mail;
 using System.Security;
 using MailSenderLib.Entities;
 using MailSender.Controls;
-using MailSenderLib.Data.LinqToSQL;
+//using MailSenderLib.Data.LinqToSQL;
 
 namespace MailSender
 {
@@ -16,22 +16,22 @@ namespace MailSender
     {
 
         public Server Author { get; set; }
-        public Letter Msg { get; set; }
+        public Email Msg { get; set; }
         public IResult ResultMsg { get; set; }
 
-        public EmailSendServiceClass(Server author, Letter msg, IResult resultMsg)
+        public EmailSendServiceClass(Server author, MailSenderLib.Entities.Email msg, IResult resultMsg)
         { Author = author;Msg = msg;ResultMsg = resultMsg; }
 
         public void Send<T>(IEnumerable<T> addresses)
         {
 
-            using (SmtpClient client = new SmtpClient(Author.Address, Author.Port))
+            using (SmtpClient client = new SmtpClient(Author.Host, Author.Port))
             {
                 client.EnableSsl = true;
                 client.Credentials = new NetworkCredential(Author.UserName, Author.Password);
                 foreach(T address in addresses)
                 {
-                    using (MailMessage message = new MailMessage())
+                    using (System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage())
                     {
                         message.From = new MailAddress(Author.UserName, Author.Name);
                         message.To.Add(address as string);

@@ -66,7 +66,7 @@ namespace MailSender
             }
             else {
                 new EmailSendServiceClass(new MailSenderLib.Entities.Server(TestServer.SelectedItem as Server) { UserName = TestAdress.Text, Password = TestPassword.SecurePassword },
-                    LettersList.SelectedItem as Letter,
+                    LettersList.SelectedItem as Email,
                     new SendEndWindow()).Send( new List<string>() { TestAdress.Text });
             }
             //string strLogin = cbSenderSelect.Text;
@@ -92,7 +92,7 @@ namespace MailSender
             //EmailSendServiceClass emailSender = new EmailSendServiceClass(cbSenderSelect.Text, cbSenderSelect.SelectedValue.ToString());
             schedule.PlanSendEmails(dtSendDateTime,
                 new EmailSendServiceClass(new MailSenderLib.Entities.Server(TestServer.SelectedItem as Server) { UserName = TestAdress.Text, Password = TestPassword.SecurePassword },
-                    LettersList.SelectedItem as Letter,
+                    LettersList.SelectedItem as Email,
                     new SendEndWindow()),
                 //new Recipient() as IEnumerable<Recipient>,//!!!!
                 //new MailSenderDBDataContext().Recipient,// рабочий вариант
