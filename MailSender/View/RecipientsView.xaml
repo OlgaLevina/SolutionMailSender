@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:MailSender.View"
              mc:Ignorable="d" 
              DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
              d:DesignHeight="450" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding RefrashDataCommand}"></i:InvokeCommandAction><!--здесь же можно указать параметры, если нужны-->
+        </i:EventTrigger><!--Нацеливается на определенное событие - наример клик, в нашем случае на Лоудед, чтобы команда кнопки сработала при загрузке окна-->
+    </i:Interaction.Triggers>
     <DockPanel>
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,10,0,7" FontSize="23">Получатели писем</TextBlock>
         <DockPanel DockPanel.Dock="Top" Margin="5,0,5,3">
