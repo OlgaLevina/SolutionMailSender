@@ -9,12 +9,20 @@ using System.Threading;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
+using System.Collections.Concurrent;//потокобезопасные коллекции
 
 namespace MailSender.ConsoleTest
 {
     internal static class SinchronizationTests
     {
+
+        private static readonly List<string> _Messages = new List<string>();
         public static void Start()
+        {
+            var concurent_dict = new ConcurrentDictionary<string, List<string>>();
+
+        }
+        public static void Start2()
         {
             Thread[] threads = new Thread[10];
             for(int i=0; i<threads.Length;i++)
