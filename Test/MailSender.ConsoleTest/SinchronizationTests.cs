@@ -17,12 +17,12 @@ namespace MailSender.ConsoleTest
     {
 
         private static readonly List<string> _Messages = new List<string>();
-        public static void Start()
+        public static void Start2()
         {
             var concurent_dict = new ConcurrentDictionary<string, List<string>>();
 
         }
-        public static void Start2()
+        public static void Start()
         {
             Thread[] threads = new Thread[10];
             for(int i=0; i<threads.Length;i++)
