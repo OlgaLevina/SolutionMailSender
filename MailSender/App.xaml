@@ -7,6 +7,10 @@
              mc:Ignorable="d" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
   <Application.Resources>
     <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resourses/Converters.xaml"/>
+                <ResourceDictionary Source="Resourses/Buttons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:MailSender.ViewModel"/>
     </ResourceDictionary>
   </Application.Resources>

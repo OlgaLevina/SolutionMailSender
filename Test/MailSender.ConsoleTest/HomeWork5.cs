@@ -15,8 +15,15 @@ namespace MailSender.ConsoleTest
 {
     internal static class HomeWork5
     {
+        /// <summary>
+        /// отсечка времени перед запуском потоков
+        /// </summary>
         public static Dates Begin { get; set; }
-
+        /// <summary>
+        /// запуск потоков факториала и суммы
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="dates"></param>
         public static void FactorialSumStart(int number,Dates dates)
         {
             //Thread factorial_thread = new Thread(() => Printer(dates.Change(Factorial(number).ToString())));
@@ -25,7 +32,11 @@ namespace MailSender.ConsoleTest
             ThreadCreate(Factorial,number);
             ThreadCreate(Sum, number);
         }
-
+        /// <summary>
+        /// создание потока
+        /// </summary>
+        /// <param name="function">обрабатываемая потоком фукнция</param>
+        /// <param name="number"></param>
         public static void ThreadCreate(Func<int,double> function,int number)
         {
             Thread thread = new Thread(() => Printer(new Dates { time = DateTime.Now }.Change(function(number).ToString())));
@@ -33,19 +44,31 @@ namespace MailSender.ConsoleTest
             thread.IsBackground = true;//чтобы правильно вывелось время на консоли
             thread.Start();
         }
-
+        /// <summary>
+        /// рекурсия факториала
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         public static double Factorial(int number)
         {
             if (number - 1 != 0) return number * Factorial(number - 1);
             else return number;
         }
-
+        /// <summary>
+        /// рукурсия суммы
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         public static double Sum(int number)
         {
             if (number - 1 != 0) return number + Sum(number - 1);
             else return number;
         }
-
+        /// <summary>
+        /// подсчет милисекунд
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <returns></returns>
         public static int TimeCount( Dates begin)
         {
 
@@ -53,9 +76,13 @@ namespace MailSender.ConsoleTest
             begin.time = DateTime.Now;
             return result;
         }
-
+        /// <summary>
+        /// блокатор
+        /// </summary>
         private static readonly object _SyncRoot = new object();//4 байта памяти - главной сделать на чтение - и используем для группировки кода с т.зр. закрытост для прерывания разными потоками
-
+        /// <summary>
+        /// данные о сообщении и времени отсечки для передачи в функция потока
+        /// </summary>
         public class Dates
         {
             public string message { get; set; } = "underfined";
@@ -63,7 +90,10 @@ namespace MailSender.ConsoleTest
             public Dates Change(string msg) { message = msg; return this; }
         }
 
-
+        /// <summary>
+        /// печать в потоке
+        /// </summary>
+        /// <param name="dates"></param>
         private static void Printer(object dates)
         {
             lock (_SyncRoot)
@@ -77,5 +107,14 @@ namespace MailSender.ConsoleTest
             }
             WriteLine($"Finished  id:{Thread.CurrentThread.ManagedThreadId}");
         }
+
+        public static void CSVINText(string csvFile)
+        {
+            using (StreamReader sr = new StreamReader(csvFile))
+            {
+                //for(int i=0;)
+            }
+        }
+        //public static void 
     }
 }

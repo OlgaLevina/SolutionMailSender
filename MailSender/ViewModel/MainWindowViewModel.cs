@@ -50,6 +50,11 @@ namespace MailSender.ViewModel
             //RefreshData();
             _SendersProvider = SendersDataProvider;
             _ServersProvider = ServersDataProvider;
+            if (IsInDesignMode) // для отладки
+            {
+                Recipients.Add(new Recipient {Id=1, Name="Recipient1", Address="recipiet1@server.com" });
+                Recipients.Add(new Recipient { Id = 2, Name = "Recipient2", Address = "recipiet2@server.com" });
+            }
         }
 
         public ICommand RefrashDataCommand { get; }

@@ -123,6 +123,7 @@
                             <Button ToolTip="Перейти" Width="25">
                                 <fa:ImageAwesome Icon="Calendar" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF4D79A4" />
                             </Button>
+                            <TextBlock Text="{Binding Recipients.Count, Converter={StaticResource DebugConverter}}" ></TextBlock> <!--здесь или в любую иную привязку, чтобы создать программно точку останова и проконтролировать значения-->
                         </ToolBar>
                         <ToolBar Band="1">
                             <Label MinWidth="85" Content="Получатели"/>
