@@ -43,8 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HomeWork5.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SinchronizationTests.cs" />
+    <Compile Include="ThreadPoolTests.cs" />
+    <Compile Include="ThreadTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

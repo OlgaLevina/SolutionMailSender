@@ -87,7 +87,9 @@
     <Compile Include="Services\Interfaces\IRecipientsDataProvider.cs" />
     <Compile Include="Services\Interfaces\IServersDataProvider.cs" />
     <Compile Include="Services\Link2SQL\LinkToSQLRecipientsDataProvider.cs" />
+    <Compile Include="Services\SmptMailSender.cs" />
     <Compile Include="Service\StringEncoder.cs" />
+    <Compile Include="xmlSerializerPool.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
