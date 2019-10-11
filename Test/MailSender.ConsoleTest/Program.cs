@@ -15,9 +15,8 @@ namespace MailSender.ConsoleTest
 
         static void Main(string[] args)
         {
-            AsyncAwaitTest.Start();
             
-            WriteLine("main thread is over");
+            //WriteLine("main thread is over");
             ReadLine();
 
 
