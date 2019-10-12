@@ -12,7 +12,11 @@ namespace MailSenderLib.Data.EF
     {
         public MailSenderDB(string ConnectionString) : base(ConnectionString) { }
         public MailSenderDB() : this("name=MailSenderDB") { }
-        public DbSet<Recipient> Artists { get; set; }
-        public DbSet<Sender> Trecks { get; set; }
+        public DbSet<Recipient> Recipients { get; set; }
+        public DbSet<Sender> Senders { get; set; }
+        public DbSet<Email> Emails { get; set; }
+        public DbSet<RecipientsList> RecipientsLists { get; set; }
+        public DbSet<Server> Servers { get; set; }
+        public DbSet<SchedularTask> SchedularTasks { get; set; }
     }
 }
