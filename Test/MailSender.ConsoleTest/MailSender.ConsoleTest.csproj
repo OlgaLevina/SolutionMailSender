@@ -56,27 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncAwaitTest.cs" />
-    <Compile Include="Data\Artist.cs">
-      <DependentUpon>SongsDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SongsDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SongsDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SongsDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SongsDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SongsDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SongsDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Treck.cs">
-      <DependentUpon>SongsDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Data\Artist.cs" />
+    <Compile Include="Data\Migrations\201910111117000_Initial.cs" />
+    <Compile Include="Data\Migrations\20191011121000_TreckStyleAdd.cs" />
+    <Compile Include="Data\Migrations\Configuration.cs" />
+    <Compile Include="Data\SongsDB.cs" />
+    <Compile Include="Data\Treck.cs" />
     <Compile Include="HomeWork5.cs" />
     <Compile Include="plinqTest.cs" />
     <Compile Include="Program.cs" />
@@ -87,33 +72,18 @@
     <Compile Include="ThreadTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="Data\SongsDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SongsDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\SongsDB.edmx.diagram">
-      <DependentUpon>SongsDB.edmx</DependentUpon>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resourses\csv.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\SongsDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SongsDB.Context.cs</LastGenOutput>
-      <DependentUpon>SongsDB.edmx</DependentUpon>
-    </Content>
-    <Content Include="Data\SongsDB.edmx.sql" />
-    <Content Include="Data\SongsDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SongsDB.cs</LastGenOutput>
-      <DependentUpon>SongsDB.edmx</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
