@@ -8,6 +8,7 @@ using static System.Console;
 using System.Globalization;
 using MailSender.ConsoleTest.Data;
 using System.Data.Entity;
+using MailSender.ConsoleTest.Documents;
 
 namespace MailSender.ConsoleTest
 {
@@ -16,7 +17,12 @@ namespace MailSender.ConsoleTest
 
         static void Main(string[] args)
         {
-            using (var db = new SongsDB()) { db.Database.Log = msg => WriteLine($"EF: {msg}");  }
+
+            var report = new Report {Data1="Test", TimeValue=DateTime.Now.Subtract(TimeSpan.FromDays(365*17)) };
+            const string report_file = "TestReport.docx";
+            report.CreatePackage(report_file);
+
+            // using (var db = new SongsDB()) { db.Database.Log = msg => WriteLine($"EF: {msg}");  }
             //using (var db = new SongsDB())
             //{
             //    //db.Configuration.AutoDetectChangesEnabled = false;//отключить автообнаружение изменений для быстродействия
@@ -72,7 +78,7 @@ namespace MailSender.ConsoleTest
             //    }
             //    db.SaveChanges();
             //}
-                ReadLine();
+            //ReadLine();
 
 
         }

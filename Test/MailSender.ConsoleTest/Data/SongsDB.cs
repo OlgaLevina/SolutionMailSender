@@ -21,5 +21,6 @@ namespace MailSender.ConsoleTest.Data
         public SongsDB() : this("name=SongsDB") { }
         public DbSet<Artist> Artists{get;set;}
         public DbSet<Treck> Trecks { get; set; }
+        public DbSet<Album> Albums { get; set; }
     }
 }

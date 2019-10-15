@@ -1,4 +1,5 @@
-﻿using MailSenderLib.Entities;
+﻿using MailSenderLib.Data.EF.Migrations;
+using MailSenderLib.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,5 +19,9 @@ namespace MailSenderLib.Data.EF
         public DbSet<RecipientsList> RecipientsLists { get; set; }
         public DbSet<Server> Servers { get; set; }
         public DbSet<SchedularTask> SchedularTasks { get; set; }
+        static MailSenderDB()//вместо апдейта через консоль диспетчера проектов
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MailSenderDB, Configuration>());//лучше всего - через миграции - при каждом запуске приложения будет удаляться вся структура базы данных и создваться заново
+        }
     }
 }

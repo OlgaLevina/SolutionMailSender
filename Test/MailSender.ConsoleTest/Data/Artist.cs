@@ -14,4 +14,12 @@ namespace MailSender.ConsoleTest.Data
         public DateTime BirthDay { get; set; }
         public virtual ICollection<Treck> Trecks { get; set; }
     }
+
+    [Table("Album")]
+    public class Album
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Treck> Trecks { get; set; }
+    }
 }
