@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
+    <Compile Include="Data\EF\MailSenderDB.cs" />
+    <Compile Include="Data\EF\Migrations\201910142216004_Initial.cs" />
+    <Compile Include="Data\EF\Migrations\201910142216004_Initial.Designer.cs">
+      <DependentUpon>201910142216004_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EF\Migrations\Configuration.cs" />
     <Compile Include="Data\LinqToSQL\MailSenderDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +85,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\EF\DataContextProvider.cs" />
+    <Compile Include="Services\EF\DBSet.cs" />
+    <Compile Include="Services\EF\EFDataProvider.cs" />
+    <Compile Include="Services\EF\EFRecipientsDataProvider.cs" />
     <Compile Include="Services\InMemory\InMemoryDataProvider.cs" />
     <Compile Include="Services\InMemory\InMemoryEmailsDataProvider.cs" />
     <Compile Include="Services\InMemory\InMemorySchedularTasksDataProvider.cs" />
@@ -77,6 +96,7 @@
     <Compile Include="Services\InMemory\InMemoryRecipientsListsDataProvider.cs" />
     <Compile Include="Services\InMemory\InMemorySendersDataProvider.cs" />
     <Compile Include="Services\InMemory\InMemoryRecipientsDataProvider.cs" />
+    <Compile Include="Services\InMemory\MemoryDataContext.cs" />
     <Compile Include="Services\Interfaces\IStatisticService.cs" />
     <Compile Include="Services\Interfaces\IMailSenderService.cs" />
     <Compile Include="Services\Interfaces\IDataProvider.cs" />
@@ -91,7 +111,11 @@
     <Compile Include="Service\StringEncoder.cs" />
     <Compile Include="xmlSerializerPool.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Data\EF\Migrations\201910142216004_Initial.resx">
+      <DependentUpon>201910142216004_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Data\LinqToSQL\MailSenderDB.dbml">
@@ -102,6 +126,7 @@
     <None Include="Data\LinqToSQL\MailSenderDB.dbml.layout">
       <DependentUpon>MailSenderDB.dbml</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

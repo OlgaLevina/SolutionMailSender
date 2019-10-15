@@ -6,6 +6,9 @@ using MailSenderLib.Services;
 using MailSenderLib.Data.LinqToSQL;
 using MailSenderLib.Services.Interfaces;
 using System;
+using MailSenderLib.Data.EF;
+using MailSenderLib.Services.InMemory;
+using MailSenderLib.Services.EF;
 
 namespace MailSender.ViewModel
 {
@@ -18,14 +21,17 @@ namespace MailSender.ViewModel
             services.Register<MainWindowViewModel>();//далее регистристрируем все, что нам может пригодится в качестве сервисов
 
 
-            //services
-            //    .TryRegister<IRecipientsDataProvider, LinkToSQLRecipientsDataProvider>()
-            //    .TryRegister(() => new MailSenderDBDataContext());
-
             services
-                .TryRegister<IRecipientsDataProvider, InMemoryRecipientsDataProvider>()
-                .TryRegister<ISendersDataProvider, InMemorySendersDataProvider>()
-                .TryRegister<IServersDataProvider, InMemoryServersDataProvider>()  ;
+                .TryRegister<IRecipientsDataProvider, LinkToSQLRecipientsDataProvider>()
+                .TryRegister(() => new MailSenderDBDataContext())
+                //.TryRegister(() => new MailSenderDB())
+                .TryRegister<MemoryDataContext>()
+                .TryRegister<DataContextProvider>();
+
+            //services
+            //    .TryRegister<IRecipientsDataProvider, InMemoryRecipientsDataProvider>()
+            //    .TryRegister<ISendersDataProvider, InMemorySendersDataProvider>()
+            //    .TryRegister<IServersDataProvider, InMemoryServersDataProvider>();
         }
 
 

@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security;
 using MailSenderLib.Entities.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace MailSenderLib.Entities
 {
     public class Server : NamedEntity
     {
         //public int Id { get; set; }
+        [Required]
         public string Host { get; set; }
         //public string Name { get; set; }
         public int Port { get; set; } = 25;

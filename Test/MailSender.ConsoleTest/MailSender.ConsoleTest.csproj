@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,17 +35,61 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.9.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DocumentFormat.OpenXml.2.9.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Packaging.4.5.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncAwaitTest.cs" />
+    <Compile Include="Data\Artist.cs" />
+    <Compile Include="Data\Migrations\201910142018185_Initial.cs" />
+    <Compile Include="Data\Migrations\201910142018185_Initial.Designer.cs">
+      <DependentUpon>201910142018185_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\201910142034185_TreckStyleAdded.cs" />
+    <Compile Include="Data\Migrations\201910142034185_TreckStyleAdded.Designer.cs">
+      <DependentUpon>201910142034185_TreckStyleAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\201910142040388_TreckDescriptionAdded.cs" />
+    <Compile Include="Data\Migrations\201910142040388_TreckDescriptionAdded.Designer.cs">
+      <DependentUpon>201910142040388_TreckDescriptionAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\201910142132270_TreckElseAdded.cs" />
+    <Compile Include="Data\Migrations\201910142132270_TreckElseAdded.Designer.cs">
+      <DependentUpon>201910142132270_TreckElseAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\201910142157082_TseckCleanAlbumAdd.cs" />
+    <Compile Include="Data\Migrations\201910142157082_TseckCleanAlbumAdd.Designer.cs">
+      <DependentUpon>201910142157082_TseckCleanAlbumAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\Configuration.cs" />
+    <Compile Include="Data\SongsDB.cs" />
+    <Compile Include="Data\Treck.cs" />
+    <Compile Include="Documents\Report.cs" />
     <Compile Include="HomeWork5.cs" />
     <Compile Include="plinqTest.cs" />
     <Compile Include="Program.cs" />
@@ -54,8 +100,33 @@
     <Compile Include="ThreadTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resourses\csv.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Migrations\201910142018185_Initial.resx">
+      <DependentUpon>201910142018185_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201910142034185_TreckStyleAdded.resx">
+      <DependentUpon>201910142034185_TreckStyleAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201910142040388_TreckDescriptionAdded.resx">
+      <DependentUpon>201910142040388_TreckDescriptionAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201910142132270_TreckElseAdded.resx">
+      <DependentUpon>201910142132270_TreckElseAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\201910142157082_TseckCleanAlbumAdd.resx">
+      <DependentUpon>201910142157082_TseckCleanAlbumAdd.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
