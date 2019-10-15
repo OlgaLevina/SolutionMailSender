@@ -16,7 +16,7 @@ namespace MailSender.ConsoleTest
 {
     public class Program
     {
-        [Description("Entry point")]
+        [Description("Entry point!")]
         static void Main(string[] args)
         {
 
