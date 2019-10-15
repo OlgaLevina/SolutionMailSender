@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +40,9 @@ namespace MailSenderLib.Services.InMemory
                 Id = i,
                 Host = $"smtp.server{i}.com",
                 UserName = $"user{i}@server.com",
-                Password=$"user-{}-password"
+                Password= $"user-{i}-password".ToCharArray().Aggregate(new SecureString(),
+                    (s,c) => { s.AppendChar(c); return s; }
+                    , (s) => { s.MakeReadOnly(); return s; }) 
             }).ToList();
 
             var rnd = new Random();

@@ -8,19 +8,31 @@ using static System.Console;
 using System.Globalization;
 using MailSender.ConsoleTest.Data;
 using System.Data.Entity;
+using DocumentFormat.OpenXml.Wordprocessing;
 using MailSender.ConsoleTest.Documents;
+using System.ComponentModel;
 
 namespace MailSender.ConsoleTest
 {
     public class Program
     {
-
+        [Description("Entry point")]
         static void Main(string[] args)
         {
 
-            var report = new Report {Data1="Test", TimeValue=DateTime.Now.Subtract(TimeSpan.FromDays(365*17)) };
-            const string report_file = "TestReport.docx";
-            report.CreatePackage(report_file);
+
+            for (int i = 0; i < 10; i++)
+            {
+                WriteLine(i);
+            }
+            ReadLine();
+
+
+            //var report = new Report {Data1="Test", TimeValue=DateTime.Now.Subtract(TimeSpan.FromDays(365*17)) };
+            //const string report_file = "TestReport.docx";
+            //report.CreatePackage(report_file);
+
+
 
             // using (var db = new SongsDB()) { db.Database.Log = msg => WriteLine($"EF: {msg}");  }
             //using (var db = new SongsDB())

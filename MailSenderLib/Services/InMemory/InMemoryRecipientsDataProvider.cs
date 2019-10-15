@@ -14,7 +14,7 @@ namespace MailSenderLib.Services
     {
         private readonly MemoryDataContext _db;
         private readonly ICollection<Recipient> _items;
-
+        public InMemoryRecipientsDataProvider() { }//для тестового приложения - почему-то все слетело, после установки ришарпера
         public InMemoryRecipientsDataProvider(MemoryDataContext db) { _db = db; _items = _db.Recipients; }
 
         public int Create(Recipient item)
