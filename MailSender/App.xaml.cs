@@ -20,15 +20,15 @@ namespace MailSender
     {
         private List<IPlagin> _Plugins;
 
-        protected override async void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            _Plugins = await Task.Run(() => GetPlugins()).ConfigureAwait(false);
-            if(_Plugins.Count==0) return;
+        //protected override async void OnStartup(StartupEventArgs e)
+        //{
+        //    base.OnStartup(e);
+        //    _Plugins = await Task.Run(() => GetPlugins()).ConfigureAwait(false);
+        //    if(_Plugins.Count==0) return;
 
-            await InitializePluginsAsync(_Plugins).ConfigureAwait(false);
-            await StartPluginsAsync(_Plugins).ConfigureAwait(false);
-        }
+        //    await InitializePluginsAsync(_Plugins).ConfigureAwait(false);
+        //    await StartPluginsAsync(_Plugins).ConfigureAwait(false);
+        //}
 
         private List<IPlagin> GetPlugins()
         {
@@ -98,10 +98,10 @@ namespace MailSender
             }
         }
 
-        protected override async void OnExit(ExitEventArgs e)
-        {
-            base.OnExit(e);
-            await StopPluginsAsync(_Plugins).ConfigureAwait(false);
-        }
+        //protected override async void OnExit(ExitEventArgs e)
+        //{
+        //    base.OnExit(e);
+        //    await StopPluginsAsync(_Plugins).ConfigureAwait(false);
+        //}
     }
 }

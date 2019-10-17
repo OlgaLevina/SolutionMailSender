@@ -54,7 +54,7 @@ namespace MailSender.ViewModel
 
 
 
-        private IRecipientsDataProvider _RecipientsProvider;
+        private readonly IRecipientsDataProvider _RecipientsProvider;
         private ISendersDataProvider _SendersProvider;
         private IServersDataProvider _ServersProvider;
 
