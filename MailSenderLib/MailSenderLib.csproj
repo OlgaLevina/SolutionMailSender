@@ -97,6 +97,7 @@
     <Compile Include="Services\InMemory\InMemorySendersDataProvider.cs" />
     <Compile Include="Services\InMemory\InMemoryRecipientsDataProvider.cs" />
     <Compile Include="Services\InMemory\MemoryDataContext.cs" />
+    <Compile Include="Services\Interfaces\IPlagin.cs" />
     <Compile Include="Services\Interfaces\IStatisticService.cs" />
     <Compile Include="Services\Interfaces\IMailSenderService.cs" />
     <Compile Include="Services\Interfaces\IDataProvider.cs" />

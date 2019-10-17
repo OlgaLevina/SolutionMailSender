@@ -14,6 +14,23 @@ namespace MailSender.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private string _WindowTitle = "Программа по рассылке почты";
+
+        //private string _TestProperty;
+
+        //public string TestProperty
+        //{
+        //    get => _TestProperty;
+        //    set
+        //    {
+        //        _TestProperty = value;
+        //        //RaisePropertyChanged();//информируем систеу об изменении св-ва, если без параметра, то того, откуда вызван, либо можно указать иное св-во
+        //        //RaisePropertyChanged(nameof(TestProperty));//указав имя св-ва напрямую
+        //        //RaisePropertyChanged("TestProperty");//или текстом
+        //        //другой вариант используя дерево выражения:
+        //        RaisePropertyChanged(()=> TestProperty);
+        //    }
+        //}
+
         public string WindowTitle
         {
             get => _WindowTitle;
