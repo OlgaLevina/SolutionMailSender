@@ -22,6 +22,8 @@ namespace MailSender.ViewModel
 
             services
                 .TryRegister<IRecipientsDataProvider, LinkToSQLRecipientsDataProvider>()
+               // .TryRegister<ISendersDataProvider, InMemorySendersDataProvider>()!!!!!!
+               // .TryRegister<IServersDataProvider, InMemoryServersDataProvider>()!!!!!!
                 .TryRegister(() => new MailSenderDBDataContext())
                 .TryRegister<MemoryDataContext>()
                 .TryRegister<DataContextProvider>();

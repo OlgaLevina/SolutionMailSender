@@ -58,15 +58,15 @@ namespace MailSender.ViewModel
         private ISendersDataProvider _SendersProvider;
         private IServersDataProvider _ServersProvider;
 
-        public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider,
-            ISendersDataProvider SendersDataProvider, 
-            IServersDataProvider ServersDataProvider)
+        public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider)//,!!!!!!!
+          //  ISendersDataProvider SendersDataProvider, !!!!!!
+          //  IServersDataProvider ServersDataProvider)!!!!!!!
         {
             _RecipientsProvider = RecipientsDataProvider;
             RefrashDataCommand = new RelayCommand(OnRefrashDataCommandExecuted,CanRefrashDataCommandExecute);
             //RefreshData();
-            _SendersProvider = SendersDataProvider;
-            _ServersProvider = ServersDataProvider;
+        //    _SendersProvider = SendersDataProvider; !!!!!!
+         //   _ServersProvider = ServersDataProvider; !!!!!!!
             if (IsInDesignMode) // для отладки
             {
                 Recipients.Add(new Recipient {Id=1, Name="Recipient1", Address="recipiet1@server.com" });
