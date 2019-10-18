@@ -93,6 +93,7 @@
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="ValidationRules\RegExValidationRule.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\SimpleIocExtentions.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\RecipientsEditor.xaml.cs">
       <DependentUpon>RecipientsEditor.xaml</DependentUpon>
@@ -210,5 +211,10 @@
     <Resource Include="Media\Move.png" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Plugins\TestPlugin.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,6 +14,23 @@ namespace MailSender.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private string _WindowTitle = "Программа по рассылке почты";
+
+        //private string _TestProperty;
+
+        //public string TestProperty
+        //{
+        //    get => _TestProperty;
+        //    set
+        //    {
+        //        _TestProperty = value;
+        //        //RaisePropertyChanged();//информируем систеу об изменении св-ва, если без параметра, то того, откуда вызван, либо можно указать иное св-во
+        //        //RaisePropertyChanged(nameof(TestProperty));//указав имя св-ва напрямую
+        //        //RaisePropertyChanged("TestProperty");//или текстом
+        //        //другой вариант используя дерево выражения:
+        //        RaisePropertyChanged(()=> TestProperty);
+        //    }
+        //}
+
         public string WindowTitle
         {
             get => _WindowTitle;
@@ -37,19 +54,19 @@ namespace MailSender.ViewModel
 
 
 
-        private IRecipientsDataProvider _RecipientsProvider;
+        private readonly IRecipientsDataProvider _RecipientsProvider;
         private ISendersDataProvider _SendersProvider;
         private IServersDataProvider _ServersProvider;
 
-        public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider,
-            ISendersDataProvider SendersDataProvider, 
-            IServersDataProvider ServersDataProvider)
+        public MainWindowViewModel(IRecipientsDataProvider RecipientsDataProvider)//,!!!!!!!
+          //  ISendersDataProvider SendersDataProvider, !!!!!!
+          //  IServersDataProvider ServersDataProvider)!!!!!!!
         {
             _RecipientsProvider = RecipientsDataProvider;
             RefrashDataCommand = new RelayCommand(OnRefrashDataCommandExecuted,CanRefrashDataCommandExecute);
             //RefreshData();
-            _SendersProvider = SendersDataProvider;
-            _ServersProvider = ServersDataProvider;
+        //    _SendersProvider = SendersDataProvider; !!!!!!
+         //   _ServersProvider = ServersDataProvider; !!!!!!!
             if (IsInDesignMode) // для отладки
             {
                 Recipients.Add(new Recipient {Id=1, Name="Recipient1", Address="recipiet1@server.com" });

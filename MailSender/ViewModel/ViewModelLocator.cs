@@ -5,7 +5,6 @@ using CommonServiceLocator;
 using MailSenderLib.Services;
 using MailSenderLib.Data.LinqToSQL;
 using MailSenderLib.Services.Interfaces;
-using System;
 using MailSenderLib.Data.EF;
 using MailSenderLib.Services.InMemory;
 using MailSenderLib.Services.EF;
@@ -23,10 +22,12 @@ namespace MailSender.ViewModel
 
             services
                 .TryRegister<IRecipientsDataProvider, LinkToSQLRecipientsDataProvider>()
+               // .TryRegister<ISendersDataProvider, InMemorySendersDataProvider>()!!!!!!
+               // .TryRegister<IServersDataProvider, InMemoryServersDataProvider>()!!!!!!
                 .TryRegister(() => new MailSenderDBDataContext())
-                //.TryRegister(() => new MailSenderDB())
                 .TryRegister<MemoryDataContext>()
                 .TryRegister<DataContextProvider>();
+            //.TryRegister(() => new MailSenderDB());
 
             //services
             //    .TryRegister<IRecipientsDataProvider, InMemoryRecipientsDataProvider>()
@@ -46,34 +47,6 @@ namespace MailSender.ViewModel
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
-        }
-    }
-
-    public static class SimpleIocExtentions
-    {
-        public static SimpleIoc TryRegister <TInterface, TService> (this SimpleIoc serivces)
-            where TInterface: class
-            where TService: class, TInterface
-        {
-            if (serivces.IsRegistered<TInterface>()) return serivces;
-            serivces.Register<TInterface, TService>();
-            return serivces;
-        }
-
-        public static SimpleIoc TryRegister<TService>(this SimpleIoc serivces)
-            where TService : class
-        {
-            if (serivces.IsRegistered<TService>()) return serivces;
-            serivces.Register<TService>();
-            return serivces;
-        }
-
-        public static SimpleIoc TryRegister<TService>(this SimpleIoc serivces, Func<TService> Factory)
-            where TService : class
-        {
-            if (serivces.IsRegistered<TService>()) return serivces;
-            serivces.Register(Factory);
-            return serivces;
         }
     }
 }
